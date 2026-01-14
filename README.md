@@ -3,13 +3,10 @@
 This application is meant to help with monthly subscriptions, so that one doesn't get lost in their subcription finances. A user will be able to see a list view of all their subscriptions and have teh ability to delete a subscription or add one. When adding a subscription, a user will be prompted to input the frequency, fixed billing amount, billing period, next charge date, category, and notes. The user will also be able to view a spending summary across all subscriptions, with a recurring billing simulation. This application will also include free trial tracking, where a user can input a free trial that they signed up for, and will notify the user a couple days before the firee trial expires.
 
 
-> [!NOTE]
-> If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
+
 
 ## 🚀 Specification Deliverable
 
-> [!NOTE]
-> Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
