@@ -22,7 +22,7 @@ Don't you just love having the ability to have numerous streams of media all at 
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](/images/IMG_8AA04D325282-1.jpeg)
 
 
 ### Key features
