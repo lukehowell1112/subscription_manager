@@ -53,15 +53,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - Each one of my pages use HTML as the structure.
+- [x] **Proper HTML element usage** - My program uses nav, buttons, form, text inputs, etc.
+- [x] **Links** - Links are used to navigate to different pages.
+- [x] **Text** - My program uses a lot of text, a long with text inputs that the user can use.
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
 - [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **Login placeholder** - Login placeholder is found on the home page.
+- [x] **DB data placeholder** - DB placehholder is found on the dashboard page and "add subscription" page.
+- [x] **WebSocket placeholder** - Websocket will be used with tracking dates, as shown in the dashboard page.
 
 ## 🚀 CSS deliverable
 
