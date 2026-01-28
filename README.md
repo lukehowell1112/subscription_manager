@@ -53,12 +53,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **HTML pages** - Each one of my pages use HTML as the structure.
+- [x] **HTML pages** - My HTML pages are Home, Dashboard, Edit Dashboard, Add Subscription, Delete Subscription, Edit Subscription, and About. 
 - [x] **Proper HTML element usage** - My program uses nav, buttons, form, text inputs, etc.
 - [x] **Links** - Links are used to navigate to different pages.
-- [x] **Text** - My program uses a lot of text, a long with text inputs that the user can use.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
+- [x] **Text** - The text has proper application context, with titles, headings, text inputs, paragraphs, etc.
+- [x] **3rd party API placeholder** - I will use 3rd party API for email notifications. My dashboard page has an "Enable Notifications" button.
+- [x] **Images** - Image usage found on about page.
 - [x] **Login placeholder** - Login placeholder is found on the home page.
 - [x] **DB data placeholder** - DB placehholder is found on the dashboard page and "add subscription" page.
 - [x] **WebSocket placeholder** - Websocket will be used with tracking dates, as shown in the dashboard page.
