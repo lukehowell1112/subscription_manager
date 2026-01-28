@@ -61,7 +61,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Images** - Image usage found on about page.
 - [x] **Login placeholder** - Login placeholder is found on the home page.
 - [x] **DB data placeholder** - DB placehholder is found on the dashboard page and "add subscription" page.
-- [x] **WebSocket placeholder** - Websocket will be used with tracking dates, as shown in the dashboard page.
+- [x] **WebSocket placeholder** - Websocket will be used with sharing your personal dashboard, as seen in the dashboard page so others can see real time updates.
 
 ## 🚀 CSS deliverable
 
