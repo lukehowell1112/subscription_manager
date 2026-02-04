@@ -29,8 +29,8 @@
 
                     <nav class="site-nav">
                         <menu class="nav-list">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li><a class="nav-link" href="index.html">Home</a></li>
+                            <li><a class="nav-link" href="dashboard.html">Dashboard</a></li>
                             <li class="dropdown">
                                 <a
                                     class="nav-link dropdown-toggle"
@@ -46,31 +46,58 @@
                                     <li><a class="dropdown-item" href="delete.html">Delete Subscription</a></li>
                                 </ul>
                             </li>
-                            <li><a href="about.html">About</a></li>
+                            <li><a class="nav-link" href="about.html">About</a></li>
                         </menu>
                     </nav>
-            <hr />
+                </div>
+            </div>
         </header>
 
-        <main>
-            <h2>Delete Subscription</h2>
-            <h4>Which subscription would you like to delete?</h4>
-            <form>
+        <main class="container main-wrap">
+            <div class="page-head">
                 <div>
-                    <button type="submit">Disney+</button>
-                    <br>
-                    <button type="submit">Gym</button>
-                    <br>
-                    <button type="submit">Spotify</button>
+                    <h2 class="page-title">Delete Subscription</h2>
+                    <p class="page-subtitle">Select a subscription and confirm deletion.</p>
                 </div>
-            </form>
+            </div>
+
+            <section class="card form-card danger-card">
+                <h3 class="danger-title">Choose a subscription</h3>
+                <p class="danger-text">
+                This action can’t be undone.(for this assignment it just returns to the dashboard)
+                </p>
+
+                <form class="vstack gap-3" method="get" action="dashboard.html">
+                    <div class="choice-list">
+                        <label class ="choice">
+                            <input type="radio" name="sub" value="disney" checked />
+                            <span>Disney+</span>
+                        </label>
+
+                        <label class="choice">
+                            <input type="radio" name="sub" value="gym" />
+                            <span>Gym</span>
+                        </label>
+
+                        <label class="choice">
+                            <input type="radio" name="sub" value="spotify" />
+                            <span>Spotify</span>
+                        </label>
+                    </div>
+
+                    <div class="button-row">
+                        <a class="button-secondary button-link" href="dashboard.html">Cancel</a>
+                        <button class="button-danger" type="submit">Delete</button>
+                    </div>
+                </form>
+            </section>
         </main>
         
-        <footer>
-            <hr />
-            <span class="text-reset">Created by Luke Howell</span>
-            <br />
-            <a href="https://github.com/lukehowell1112/subscription_manager">GitHub</a>
+        <footer class="site-footer">
+            <div class="container footer-row">
+                <span class="text-reset">Created by Luke Howell</span>
+                <a href="https://github.com/lukehowell1112/subscription_manager">GitHub</a>
+            </div>
         </footer>
 
         <script

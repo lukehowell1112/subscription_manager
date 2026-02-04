@@ -32,6 +32,96 @@
   text-decoration: none;
 }
 
+/* danger card for deleting a subscription */
+.danger-card {
+  border-color: rgba(239, 68, 68, 0.28);
+}
+
+.danger-title {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.danger-text {
+  margin: 0 0 14px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* list of radio choices */
+.choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(2, 6, 23, 0.22);
+  cursor: pointer;
+}
+
+.choice:hover {
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.button-danger {
+  flex: 1;
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 800;
+  cursor: pointer;
+  color: white;
+  background: rgba(239, 68, 68, 0.85);
+  transition: opacity 0.15s, transform 0.05s;
+}
+
+.button-danger:hover { opacity: 0.92; }
+.button-danger:active { transform: translateY(1px); }
+
+
+/*different buttons*/
+.choice input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: rgba(2, 6, 23, 0.6);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.choice input[type="radio"]::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.12s ease-in-out;
+  background: var(--blue-3);
+}
+
+.choice input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.choice input[type="radio"]:checked {
+  border-color: var(--blue-3);
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.25);
+}
+
+
 /* Responsive */
 @media (max-width: 900px) {
   .form-grid {
