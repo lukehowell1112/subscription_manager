@@ -255,13 +255,27 @@ label {
 	margin-bottom: 18px;
 }
 
-.about-image {
-	width: 100%;
-	max-width: 420px;
-	border-radius: 16px;
-	border: 1px solid var(--border);
-	box-shadow: 0 16px 40px rgba(2, 6, 23, 0.35);
+@media (max-width: 768px) {
+  #about-blah {
+    grid-template-columns: 1fr;   
+    gap: 16px;
+  }
+
+  .about-image {
+    max-width: 100%;              /*shrink to phone width */
+  }
 }
+
+.about-image {
+  width: 100%;
+  max-width: 420px;
+  height: auto;                   
+  display: block;                
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 40px rgba(2, 6, 23, 0.35);
+}
+
 
 .about-title {
 	font-size: 32px;
