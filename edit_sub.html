@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Subscription Manager - Edit Subscription</title>
 
         <!-- BOOTSTRAP -->
         <link
@@ -17,53 +17,82 @@
         <link rel="stylesheet" href="main.css" />
         <link rel="stylesheet" href="forms.css" />
     </head>
-    <body>
-        <header>
-            <h1>Subscription Manager<sup>&reg;</sup></h1>
-            <nav>
-                <menu>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li class="dropdown">
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >Edit Dashboard</a>
 
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="add.html">Add Subscription</a></li>
-                            <li><a class="dropdown-item" href="edit_sub.html">Edit Subscription</a></li>
-                            <li><a class="dropdown-item" href="delete.html">Delete Subscription</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="about.html">About</a></li>
-                </menu>
-            </nav>
-            <hr />
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="header-row">
+                    <div class="brand">
+                        <img src="Icon.png" alt="Subscription Manager icon" class="brand-icon" />
+                        <h1>Subscription Manager<sup>&reg;</sup></h1>
+                    </div>
+
+                    <na class="site-nav">
+                        <menu class="nav-list">
+                            <li><a class="nav-link" href="index.html">Home</a></li>
+                            <li><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                            <li class="dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >Edit Dashboard</a>
+
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="add.html">Add Subscription</a></li>
+                                    <li><a class="dropdown-item" href="edit_sub.html">Edit Subscription</a></li>
+                                    <li><a class="dropdown-item" href="delete.html">Delete Subscription</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="nav-link" href="about.html">About</a></li>
+                        </menu>
+                    </nav>
+                </div>
+            </div>
         </header>
 
-        <main>
-            <h2>Edit Subscription</h2>
-            <h4>Which subscription would you like to edit?</h4>
-            <form>
+        <main class="container main-wrap">
+            <div class="page-head">
                 <div>
-                    <button type="submit">Disney+</button>
-                    <br>
-                    <button type="submit">Gym</button>
-                    <br>
-                    <button type="submit">Spotify</button>
+                    <h2 class="page-title">Edit Subscription</h2>
+                    <p class="page-subtitle">Choose one to update its details.</p>
                 </div>
-            </form>
+            </div>
+
+            <section class="card form-card">
+                <form class="vstack gap-3" method="get" action="edit_form.html">
+                    <div class="choice-list">
+                        <label class="choice">
+                            <input type="radio" name="sub" value="disney" checked />
+                            <span>Disney+</span>
+                        </label>
+
+                        <label class="choice">
+                            <input type="radio" name="sub" value="gym" />
+                            <span>Gym</span>
+                        </label>
+
+                        <label class="choice">
+                            <input type="radio" name="sub" value="spotify" />
+                            <span>Spotify</span>
+                        </label>
+                    </div>
+
+                    <div class="button-row">
+                        <a class="button-secondary button-link" href="dashboard.html">Cancel</a>
+                        <button class="button-primary" type="submit">Continue</button>
+                    </div>
+                </form>
+            </section>
         </main>
         
-        <footer>
-            <hr />
-            <span class="text-reset">Created by Luke Howell</span>
-            <br />
-            <a href="https://github.com/lukehowell1112/subscription_manager">GitHub</a>
+        <footer class="site-footer">
+            <div class="container footer-row">
+                <span class="text-reset">Created by Luke Howell</span>
+                <a href="https://github.com/lukehowell1112/subscription_manager">GitHub</a>
+            </div>
         </footer>
 
         <script
@@ -71,6 +100,5 @@
             integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
             crossorigin="anonymous"
         ></script>
-        </main>
     </body>
 </html>
