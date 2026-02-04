@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Subscription Manager - Edit Details</title>
+
+		<!-- BOOTSTRAP -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+			crossorigin="anonymous"
+		/>
+
+		<link rel="icon" href="/favicon.ico" />
+		<link rel="stylesheet" href="main.css" />
+		<link rel="stylesheet" href="forms.css" />
+	</head>
+
+	<body>
+		<header class="site-header">
+			<div class="container">
+				<div class="header-row">
+					<div class="brand">
+						<img src="Icon.png" alt="Subscription Manager icon" class="brand-icon" />
+						<h1>Subscription Manager<sup>&reg;</sup></h1>
+					</div>
+
+					<nav class="site-nav">
+						<menu class="nav-list">
+							<li><a class="nav-link" href="index.html">Home</a></li>
+							<li><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+
+							<li class="dropdown">
+								<a
+									class="nav-link dropdown-toggle active"
+									href="#"
+									role="button"
+									data-bs-toggle="dropdown"
+									aria-expanded="false"
+								>
+									Edit Dashboard
+								</a>
+
+								<ul class="dropdown-menu dropdown-menu-dark">
+									<li><a class="dropdown-item" href="add.html">Add Subscription</a></li>
+									<li><a class="dropdown-item" href="edit_sub.html">Edit Subscription</a></li>
+									<li><a class="dropdown-item" href="delete.html">Delete Subscription</a></li>
+								</ul>
+							</li>
+
+							<li><a class="nav-link" href="about.html">About</a></li>
+						</menu>
+					</nav>
+				</div>
+			</div>
+		</header>
+
+		<main class="container main-wrap">
+			<div class="page-head">
+				<div>
+					<h2 class="page-title">Edit Details</h2>
+					<p class="page-subtitle">Update the fields and save changes.</p>
+				</div>
+			</div>
+
+			<section class="card form-card">
+				<form class="form-grid" method="get" action="dashboard.html">
+					<div class="field">
+						<label for="name">Subscription name</label>
+						<input id="name" class="input" type="text" value="Disney+" />
+					</div>
+
+					<div class="field">
+						<label for="cost">Fixed cost</label>
+						<input id="cost" class="input" type="text" value="$4.99" />
+					</div>
+
+					<div class="field">
+						<label for="cycle">Billing cycle</label>
+						<input id="cycle" class="input" type="text" value="Monthly" />
+					</div>
+
+					<div class="field">
+						<label for="last">Last billed</label>
+						<input id="last" class="input" type="text" value="Feb 1, 2026" />
+					</div>
+
+					<div class="field">
+						<label for="category">Category</label>
+						<input id="category" class="input" type="text" value="Entertainment" />
+					</div>
+
+					<div class="field field-wide">
+						<label for="notes">Notes</label>
+						<input id="notes" class="input" type="text" value="Family plan" />
+					</div>
+
+					<div class="button-row field-wide">
+						<a class="button-secondary button-link" href="dashboard.html">Cancel</a>
+						<button class="button-primary" type="submit">Save changes</button>
+					</div>
+				</form>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="container footer-row">
+				<span class="text-reset">Created by Luke Howell</span>
+				<a href="https://github.com/lukehowell1112/subscription_manager">GitHub</a>
+			</div>
+		</footer>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>
