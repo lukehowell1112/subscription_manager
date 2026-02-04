@@ -85,6 +85,23 @@ h1, h2, h3 { margin: 0; }
   border-radius: 6px;
 }
 
+/*dropdown menu*/
+.dropdown-menu {
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.dropdown-item {
+  border-radius: 10px;
+  color: var(--text);
+}
+
+.dropdown-item:hover {
+  background: rgba(148, 163, 184, 0.12);
+}
+
 /* menu */
 .nav-list {
   list-style: none;
