@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Subscription Manager HTML</title>
+        <title>Subscription Manager - Dashboard</title>
 
         <!-- BOOTSTRAP -->
         <link
@@ -16,68 +16,109 @@
         <link rel="icon" href="/favicon.ico">
 
         <link rel="stylesheet" href="main.css" />
+        <link rel="stylesheet" href="dashboard.css" />
     </head>
     <body>
-        <header>
-            <h1>Subscription Manager<sup>&reg;</sup></h1>
-            <nav>
-                <menu>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="edit_dash.html">Edit Dashboard</a></li>
-                    <li><a href="add.html">Add Subscription</a></li>
-                    <li><a href="delete.html">Delete Subscription</a></li>
-                    <li><a href="edit_sub.html">Edit Subscription</a></li>
-                    <li><a href="about.html">About</a></li>
-                </menu>
-            </nav>
-            <hr />
+        <header class="site-header">
+            <div class="container">
+                <div class="header-row">
+                    <div class="brand">
+                        <img src="Icon.png" alt="Subscription Manager icon" class="brand-icon" />
+                        <h1>Subscription Manager<sup>&reg;</sup></h1>
+                    </div>
+            
+                    <nav class="site-nav">
+                        <menu class="nav-list">
+                            <li><a class="nav-link" href="index.html">Home</a></li>
+                            <li><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+                            <li><a class="nav-link" href="edit_dash.html">Edit Dashboard</a></li>
+                            <li><a class="nav-link" href="add.html">Add Subscription</a></li>
+                            <li><a class="nav-link" href="delete.html">Delete Subscription</a></li>
+                            <li><a class="nav-link" href="edit_sub.html">Edit Subscription</a></li>
+                            <li><a class="nav-link" href="about.html">About</a></li>
+                        </menu>
+                    </nav>
+                </div>
+            </div>
         </header>
 
-        <main>
-            <h2>Your Dashboard</h2>
-            <p>User: TestUser</p>
-            <table border="1">
-                <tr>
-                    <th>Service</th>
-                    <th>Price</th>
-                    <th>Cycle</th>
-                    <th>Next Billing</th>
-                    <th>Category</th>
-                </tr>
-                <tr>
-                    <td>Disney+</td>
-                    <td>$4.99</td>
-                    <td>Monthly</td>
-                    <td>February 15th</td>
-                    <td>Entertainment</td>
-                </tr>
-                <tr>
-                    <td>Gym</td>
-                    <td>$9.99</td>
-                    <td>Monthly</td>
-                    <td>February 1st</td>
-                    <td>Health</td>
-                </tr>
-                <tr>
-                    <td>Spotify</td>
-                    <td>$4.99</td>
-                    <td>Monthly</td>
-                    <td>February 25th</td>
-                    <td>Entertainment</td>
-                </tr>
-            </table>
-            <p>You spend $19.97 a month across 3 subscriptions</p>
-            <button type="submit">Edit</button>
-            <button type="submit">Enable Notifications</button>
-            <button type="submit">Share Dashboard</button>
+        <main class="container main-wrap">
+            <div class="page-head">
+                <div>
+                    <h2 class="page-title">Your Dashboard</h2>
+                    <p class="page-subtitle">User: <span class="pill">TestUser</span></p>
+                </div>
+
+                <div class="button-row">
+                    <button class="button-primary" type="button">Edit</button>
+                    <button class="button-secondary" type="button">Enable Notifications</button>
+                    <button class="button-secondary" type="button">Share Dashboard</button>
+                </div>
+            </div>
+
+            <section class="card table-card">
+                <div class="table-wrap">
+                    <table class="sub-table">
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                                <th>Cycle</th>
+                                <th>Next Billing</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Disney+</td>
+                                <td>$4.99</td>
+                                <td>Monthly</td>
+                                <td>February 15th</td>
+                                <td><span class="tag">Entertainment</span></td>
+                            </tr>
+                            <tr>
+                                <td>Gym</td>
+                                <td>$9.99</td>
+                                <td>Monthly</td>
+                                <td>February 1st</td>
+                                <td><span class="tag tag-green">Health</span></td>
+                            </tr>
+                            <tr>
+                                <td>Spotify</td>
+                                <td>$4.99</td>
+                                <td>Monthly</td>
+                                <td>February 25th</td>
+                                <td><span class="tag">Entertainment</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="summary-grid">
+                <div class="card summary-card">
+                    <p class="summary-label">Monthly total</p>
+                    <p class="summary-value">$19.97</p>
+                </div>
+
+                <div class="card summary-card">
+                    <p class="summary-label">Subscriptions</p>
+                    <p class="summary-value">3</p>
+                </div>
+
+                <div class="card summary-card">
+                    <p class="summary-label">Top category</p>
+                    <p class="summary-value">Entertainment</p>
+                </div>
+            </section>
         </main>
 
-        <footer>
-            <hr />
-            <span class="text-reset">Created by Luke Howell</span>
-            <br />
-            <a href="https://github.com/lukehowell1112/subscription_manager">GitHub</a>
+        <footer class="site-footer">
+            <div class="container footer-row">
+                <span class="text-reset">Created by Luke Howell</span>
+                <a href="https://github.com/lukehowell1112/subscription_manager">GitHub</a>
+            </div>
         </footer>
-    <body>
+    </body>
 </html>
