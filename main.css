@@ -1,5 +1,5 @@
 /* theme */
-/* colors used in icon */
+/* color pallete */
 :root {
   --bg: #1e293b;          /* slate */
   --surface: #0f172a;     /* darker slate */
@@ -244,6 +244,66 @@ label {
   justify-content: space-between;
   gap: 12px;
   align-items: center;
+}
+
+/* about page */
+#about-hero {
+	display: grid;
+	grid-template-columns: 420px 1fr;
+	gap: 20px;
+	align-items: center;
+	margin-bottom: 18px;
+}
+
+.about-image {
+	width: 100%;
+	max-width: 420px;
+	border-radius: 16px;
+	border: 1px solid var(--border);
+	box-shadow: 0 16px 40px rgba(2, 6, 23, 0.35);
+}
+
+.about-title {
+	font-size: 32px;
+	font-weight: 900;
+	letter-spacing: -0.5px;
+}
+
+.about-lead {
+	margin: 10px 0 0 0;
+	color: var(--muted);
+	max-width: 60ch;
+}
+
+.about-card {
+	padding: 18px;
+	margin-top: 14px;
+}
+
+.about-card h3 {
+	margin: 0 0 8px 0;
+	font-size: 18px;
+	font-weight: 900;
+}
+
+.about-card p {
+	margin: 0;
+	color: var(--text);
+}
+
+.about-list {
+	margin: 10px 0 0 18px;
+	color: var(--text);
+}
+
+@media (max-width: 900px) {
+	.about-hero {
+		grid-template-columns: 1fr;
+	}
+
+	.about-image {
+		max-width: 100%;
+	}
 }
 
 
