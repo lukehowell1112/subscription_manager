@@ -71,7 +71,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Use of a CSS framework** - I used bootstrap as a foundation and built off of it. I also used it to help me make a drop down menu in my header for the "edit dashboard" button.
 - [x] **All visual elements styled using CSS** - This is very evident in my main.css, dashboard.css, and forms.css.
 - [x] **Responsive to window resizing using flexbox and/or grid display** - I used grid to organize forms and dashboard content into evenly spaced columns. I used flexbox to align navigation items, buttons, and content blocks. Consistent padding, margins, and spacing between elements helped prevent clutter and improve readability.
-- [x] **Use of a imported font** - I imported and used the font "Inter". The imports are visible in my html files and the usage is visible in my main.css in the element selector "body".
+- [x] **Use of a imported font** - I imported and used the font "Source Sans 3". The imports are visible in my html files and the usage is visible in my main.css in the element selector "body".
 - [x] **Use of different types of selectors including element, class, ID, and pseudo selectors** -  I used element selectors to style base HTML structure(body, main, label, heading selectors). I used class selectors a lot. Majority of my styling was done with class selectors and this is very evident in my css files. I implemented and ID selector for my about-blah section on the About page(line 250 in main.css). I also used pseudo-classes(:hover, :activate) and pseudo-elements(::before). I used a couple other selectors not already named like descendant and attribute.
 
 ## 🚀 React part 1: Routing deliverable
