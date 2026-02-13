@@ -1,6 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './app.css';
+
 
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
@@ -14,7 +16,7 @@ import { About } from './about/about';
 export default function App() {
   return (
     <BrowserRouter>
-    <div className="body bg-dark text-light">
+    <div className="body">
         <header className="site-header">
             <div className="container">
                 <div className="header-row">
@@ -28,21 +30,21 @@ export default function App() {
                             <li><NavLink className="nav-link" to="/">Home</NavLink></li>
                             <li><NavLink className="nav-link" to="dashboard">Dashboard</NavLink></li>
                             <li className="dropdown">
-                                <NavLink
+                                <a
                                     className="nav-link dropdown-toggle"
-                                    to="#"
+                                    href="#"
                                     role="button"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
-                                >Edit Dashboard</NavLink>
+                                >Edit Dashboard</a>
 
                                 <ul className="dropdown-menu dropdown-menu-dark">
-                                    <li><NavLink className="dropdown-item" to="add.html">Add Subscription</NavLink></li>
-                                    <li><NavLink className="dropdown-item" to="edit_sub.html">Edit Subscription</NavLink></li>
-                                    <li><NavLink className="dropdown-item" to="delete.html">Delete Subscription</NavLink></li>
+                                    <li><NavLink className="dropdown-item" to="add">Add Subscription</NavLink></li>
+                                    <li><NavLink className="dropdown-item" to="edit_sub">Edit Subscription</NavLink></li>
+                                    <li><NavLink className="dropdown-item" to="delete">Delete Subscription</NavLink></li>
                                 </ul>
                             </li>
-                            <li><NavLink className="nav-link" to="about.html">About</NavLink></li>
+                            <li><NavLink className="nav-link" to="about">About</NavLink></li>
                         </menu>
                     </nav>
                 </div>
