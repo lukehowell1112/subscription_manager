@@ -1,17 +1,7 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function Add() {
-	const navigate = useNavigate();
-
-	function handleSubmit(e) {
-		e.preventDefault();
-
-		// TODO: Save subscription data here
-
-		navigate("/dashboard");
-	}
-
 	return (
 		<main className="container main-wrap">
 			<div className="page-head">
@@ -24,7 +14,7 @@ export function Add() {
 			</div>
 
 			<section className="card form-card">
-				<form className="form-grid" onSubmit={handleSubmit}>
+				<form className="form-grid">
 					<div className="field">
 						<label htmlFor="name">Subscription name</label>
 						<input
@@ -83,12 +73,12 @@ export function Add() {
 							Return to Dashboard
 						</Link>
 
-						<button
-							className="button-primary"
-							type="submit"
+						<Link
+							className="button-primary button-link"
+							to="/dashboard"
 						>
 							Submit
-						</button>
+						</Link>
 					</div>
 				</form>
 			</section>
