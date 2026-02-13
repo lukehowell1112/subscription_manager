@@ -16,11 +16,11 @@
 /* base */
 * { box-sizing: border-box; }
 
-html, body {
+html, .body {
     height: 100%
 }
 
-body {
+.body {
   margin: 0;
   font-family: 'Source Sans 3', system-ui, sans-serif; /* source sans 3 is the google font that was imported */
   background: var(--bg);
