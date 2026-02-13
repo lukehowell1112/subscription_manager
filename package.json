@@ -4,21 +4,22 @@
   "description": "This application is meant to help with monthly subscriptions, so that one doesn't get lost in their subcription finances. A user will be able to see a list view of all their subscriptions and have the ability to delete a subscription or add one. When adding a subscription, a user will be prompted to input the frequency, fixed billing amount, billing period, next charge date, category, and notes. The user will also be able to view a spending summary across all subscriptions, with a recurring billing simulation. This application will also include free trial tracking, where a user can input a free trial that they signed up for, and will notify the user a couple days before the firee trial expires.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lukehowell1112/subscription_manager.git"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/lukehowell1112/subscription_manager/issues"
-  },
-  "homepage": "https://github.com/lukehowell1112/subscription_manager#readme",
   "devDependencies": {
     "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "react": "^19.2.4",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.13.0"
   }
 }
