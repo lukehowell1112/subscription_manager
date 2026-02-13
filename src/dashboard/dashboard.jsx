@@ -1,6 +1,9 @@
 import React from 'react';
+import './app.css'
 import './dashboard.css'
 import './forms.css'
+
+import { Link } from "react-router-dom";
 
 export function Dashboard() {
   return (
@@ -12,7 +15,7 @@ export function Dashboard() {
                 </div>
 
                 <div className="button-row">
-                    <a href="edit_sub.html" className="button-primary button-link">Edit</a>
+                    <Link to="/edit-sub" className="button-primary button-link">Edit</Link>
                     <button className="button-secondary" type="button">Enable Notifications</button>
                     <button className="button-secondary" type="button">Share Dashboard</button>
                 </div>

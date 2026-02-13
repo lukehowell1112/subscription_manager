@@ -160,9 +160,6 @@ h1, h2, h3 { margin: 0; }
   border: 1px solid var(--border);
   border-radius: 16px;
   box-shadow: 0 16px 40px rgba(2,6,23,0.45);
-
-  display: block;
-  color: var(--text);
 }
 
 .login-card {
