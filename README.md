@@ -78,9 +78,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - I downloaded vite. The header and footer are constant and the body is what changes.
+- [x] **Components** - I created all of the jsx components and tehy are bundled using vite. When changing tabs it doesn't go to new html pages rather it changes the body.
+- [x] **Router** - All of my routes are available in my "app.jsx" and I use thouse routes in each of my jsx files.
 
 ## 🚀 React part 2: Reactivity deliverable
 
