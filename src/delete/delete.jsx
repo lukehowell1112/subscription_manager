@@ -3,6 +3,29 @@ import {Link, useNavigate} from "react-router-dom";
 import {getSubscriptions, deleteSubscription} from '../services/subscriptionService';
 
 export function Delete() {
+	const navigate = useNavigate();
+
+	const [subscriptions, setSubscriptions] = useState([]);
+	const [selectedId, setSelectedId] = useState(null);
+
+	useEffect(() => {
+		const subs = getSubscriptions();
+		setSubscriptions(subs);
+		setSelectedId(subs.length > 0 ? subs[0].id : null);
+	}, []);
+
+	function handleSubmit(e) {
+		e.preventDefault();
+
+		if(selectedId == null) {
+			alert("No subscription selected.");
+			return;
+		}
+
+		deleteSubscription(selectedId);
+		navigate("/dashboard");
+	}
+	
 	return (
 		<main className="container main-wrap">
 			<div className="page-head">
