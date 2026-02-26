@@ -3,6 +3,22 @@ import { useNavigate } from "react-router-dom";
 import {setCurrentUser} from "../services/subscriptionService";
 
 export function Login() {
+	const navigate = useNavigate();
+
+	const[username, setUsername] = useState("");
+	const[password, setPassword] = useState("");
+
+	function handleSubmit(e) {
+		e.preventDefault();
+
+		if(!username.trim()) {
+			alert("Please enter a username.")
+			return;
+		}
+
+		setCurrentUser(username);
+		navigate("/dashboard");
+	}
 	return (
 		<main className="container main-wrap">
 			<section className="blah">
