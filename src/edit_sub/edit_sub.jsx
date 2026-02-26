@@ -13,7 +13,7 @@ export function Edit_Sub() {
 		setSubscriptions(subs);
 		setSelectedId(subs.length > 0 ? subs[0].id : null);
 	}, []);
-	
+
 	function handleContinue(e) {
 		e.preventDefault();
 
@@ -37,25 +37,32 @@ export function Edit_Sub() {
 			<section className="card form-card">
 				<form className="vstack gap-3" onSubmit={handleContinue}>
 					<div className="choice-list">
-						<label className="choice">
-							<input
-								type="radio"
-								name="sub"
-								value="disney"
-								defaultChecked
-							/>
-							<span>Disney+</span>
-						</label>
+						{subscriptions.length === 0 ? (
+							<p className="danger-text">
+								No subscriptions available to edit.
+							</p>
+						) : (
+							subscriptions.map((sub) => (
+								<label
+									className="choice"
+									key={sub.id}
+								>
+									<input
+										type="radio"
+										name="sub"
+										value={sub.id}
+										checked={selectedId === sub.id}
+										onChange={() =>
+											setSelectedId(sub.id)
+										}
+									/>
 
-						<label className="choice">
-							<input type="radio" name="sub" value="gym" />
-							<span>Gym</span>
-						</label>
-
-						<label className="choice">
-							<input type="radio" name="sub" value="spotify" />
-							<span>Spotify</span>
-						</label>
+									<span>
+										{sub.name}
+									</span>
+								</label>
+							))
+						)}
 					</div>
 
 					<div className="button-row">
@@ -63,7 +70,7 @@ export function Edit_Sub() {
 							Cancel
 						</Link>
 
-						<button className="button-primary" type="submit" disabled={getSubscriptions.length === 0}>
+						<button className="button-primary" type="submit" disabled={subscriptions.length === 0}>
 							Continue
 						</button>
 					</div>
