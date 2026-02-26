@@ -42,7 +42,7 @@ export function Add() {
 			</div>
 
 			<section className="card form-card">
-				<form className="form-grid">
+				<form className="form-grid" onSubmit={handleSubmit}>
 					<div className="field">
 						<label htmlFor="name">Subscription name</label>
 						<input
@@ -50,6 +50,8 @@ export function Add() {
 							className="input"
 							type="text"
 							placeholder="Disney+, Gym, Spotify..."
+							value={form.name}
+							onChange={handleChange}
 						/>
 					</div>
 
@@ -60,6 +62,8 @@ export function Add() {
 							className="input"
 							type="text"
 							placeholder="$67.67"
+							value={form.cost}
+							onChange={handleChange}
 						/>
 					</div>
 
@@ -70,16 +74,20 @@ export function Add() {
 							className="input"
 							type="text"
 							placeholder="Monthly, Yearly, Weekly..."
+							value={form.cycle}
+							onChange={handleChange}
 						/>
 					</div>
 
 					<div className="field">
 						<label htmlFor="last">Billing date</label>
 						<input
-							id="last"
+							id="billingDate"
 							className="input"
 							type="text"
 							placeholder="Wenduary 56th, 3005"
+							value={form.billingDate}
+							onChange={handleChange}
 						/>
 					</div>
 
@@ -90,6 +98,8 @@ export function Add() {
 							className="input"
 							type="text"
 							placeholder="Entertainment, Health, Work..."
+							value={form.category}
+							onChange={handleChange}
 						/>
 					</div>
 
