@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import './app.css'
 import './dashboard.css'
 import './forms.css'
-import { getSubscriptions, deleteSubscription } from '../services/subscriptionService';
+import { getSubscriptions } from '../services/subscriptionService';
 
 import { Link } from "react-router-dom";
 
@@ -10,11 +10,6 @@ export function Dashboard() {
     const [subscriptions, setSubscriptions] = useState([]);
 
     useEffect(() => {setSubscriptions(getSubscriptions());}, []);
-
-    function handleDelete(id) {
-        deleteSubscription(id);
-        setSubscriptions(getSubscriptions());
-    }
     
     return (
         <main className="container main-wrap">
@@ -45,28 +40,30 @@ export function Dashboard() {
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>Disney+</td>
-                                    <td>$4.99</td>
-                                    <td>Monthly</td>
-                                    <td>February 15th</td>
-                                    <td><span className="tag">Entertainment</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Gym</td>
-                                    <td>$9.99</td>
-                                    <td>Monthly</td>
-                                    <td>February 1st</td>
-                                    <td><span className="tag tag-green">Health</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Spotify</td>
-                                    <td>$4.99</td>
-                                    <td>Monthly</td>
-                                    <td>February 25th</td>
-                                    <td><span className="tag">Entertainment</span></td>
-                                </tr>
+                                {subscriptions.length === 0 ? (
+                                    <tr>
+                                        <td colSpan="5">
+                                            No subscriptions yet. Add one to get started.
+                                        </td>
+                                    </tr>
+                                ) : (
+
+                                    subscriptions.map((sub) => (
+                                        <tr key={sub.id}>
+                                            <td>{sub.name}</td>
+                                            <td>${Number(sub.cost).toFixed(2)}</td>
+                                            <td>{sub.cycle}</td>
+                                            <td>{sub.billingDate}</td>
+                                            <td>
+                                                <span className="tag">
+                                                    {sub.category}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
                             </tbody>
+
                         </table>
                     </div>
                 </section>
