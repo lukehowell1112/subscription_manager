@@ -79,12 +79,13 @@ export function Delete() {
 							Cancel
 						</Link>
 
-						<Link
-							className="button-danger button-link"
-							to="/dashboard"
+						<button
+							className="button-danger"
+							type="submit"
+							disabled={subscriptions.length === 0}
 						>
 							Delete
-						</Link>
+						</button>
 					</div>
 				</form>
 			</section>
