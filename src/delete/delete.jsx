@@ -25,7 +25,7 @@ export function Delete() {
 		deleteSubscription(selectedId);
 		navigate("/dashboard");
 	}
-	
+
 	return (
 		<main className="container main-wrap">
 			<div className="page-head">
@@ -43,27 +43,32 @@ export function Delete() {
 					This action can’t be undone. (For this assignment it just returns to the dashboard.)
 				</p>
 
-				<form className="vstack gap-3">
+				<form className="vstack gap-3" onSubmit={handleSubmit}>
 					<div className="choice-list">
-						<label className="choice">
-							<input
-								type="radio"
-								name="sub"
-								value="disney"
-								defaultChecked
-							/>
-							<span>Disney+</span>
-						</label>
+						{subscriptions.length === 0 ? (
+							<p className="danger-text">
+								You don’t have any subscriptions to delete.
+							</p>
+						) : (
+							subscriptions.map((sub) => (
+								<label
+									className="choice"
+									key={sub.id}
+								>
+									<input
+										type="radio"
+										name="sub"
+										value={sub.id}
+										checked={selectedId === sub.id}
+										onChange={() => setSelectedId(sub.id)}
+									/>
 
-						<label className="choice">
-							<input type="radio" name="sub" value="gym" />
-							<span>Gym</span>
-						</label>
-
-						<label className="choice">
-							<input type="radio" name="sub" value="spotify" />
-							<span>Spotify</span>
-						</label>
+									<span>
+										{sub.name}
+									</span>
+								</label>
+							))
+						)}
 					</div>
 
 					<div className="button-row">
