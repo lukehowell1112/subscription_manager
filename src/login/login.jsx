@@ -11,6 +11,7 @@ export function Login() {
 
 	function handleLogout() {
 		logout()
+		window.location.reload();
 		navigate("/");
 	}
 
