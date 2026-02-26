@@ -11,9 +11,23 @@ export function Dashboard() {
 
     useEffect(() => {setSubscriptions(getSubscriptions());}, []);
     
+    function toMonthly(cost, cycle) {
+        const c = Number(cost);
+        if (!Number.isFinite(c)) return 0;
+
+        const normalized = String(cycle || "")
+            .trim()
+            .toLowerCase();
+
+        if (normalized.startsWith("month")) return c;
+        if (normalized.startsWith("year") || normalized.startsWith("annual")) return c / 12;
+
+        return c;
+    }
+
     const monthlyTotal = subscriptions.reduce(
-		(sum, sub) => sum + (Number(sub.cost) || 0),
-		0
+		(sum, sub) => sum + toMonthly(sub.cost, sub.cycle),
+        0
 	);
 
 	const subscriptionCount = subscriptions.length;
@@ -45,7 +59,7 @@ export function Dashboard() {
                     </div>
 
                     <div className="button-row">
-                        <Link to="/edit-sub" className="button-primary button-link">Edit</Link>
+                        <Link to="/edit_sub" className="button-primary button-link">Edit</Link>
                         <button className="button-secondary" type="button">Enable Notifications</button>
                         <button className="button-secondary" type="button">Share Dashboard</button>
                     </div>
