@@ -1,7 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {addSubscription} from "../services/subscriptionService";
 
 export function Add() {
+	const navigate = useNavigate();
+
+	const [form, setForm] = useState({
+		name: "",
+		cost: "",
+		cycle: "",
+		billingDate: "",
+		category: "",
+	});
+
+	function handleChange(e) {
+		const {id, value} = e.target;
+		setForm((prev) => ({...prev, [id]: value,}));
+	}
+
+	function handleSubmit(e) {
+		e.preventDefault();
+
+		addSubscription({
+			name: form.name,
+			cost: Number(form.cost),
+			cycle: form.cycle,
+			billingDate: form.billingDate,
+			category: form.category,
+		});
+		navigate("/dashboard")
+	}
 	return (
 		<main className="container main-wrap">
 			<div className="page-head">
