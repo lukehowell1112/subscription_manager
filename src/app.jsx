@@ -12,6 +12,7 @@ import { Delete } from './delete/delete';
 import { Edit_Sub } from './edit_sub/edit_sub';
 import { Edit_Form } from './edit_form/edit_form';
 import { About } from './about/about';
+import { RequireAuth } from "./auth/RequireAuth";
 
 export default function App() {
   return (
@@ -53,11 +54,11 @@ export default function App() {
 
       <Routes>
         <Route path='/' element={<Login />} exact />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/add' element={<Add />} />
-        <Route path='/delete' element={<Delete />} />
-        <Route path='/edit_sub' element={<Edit_Sub />} />
-        <Route path='/edit_form' element={<Edit_Form />} />
+        <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} />
+        <Route path='/add' element={<RequireAuth><Add /></RequireAuth>} />
+        <Route path='/delete' element={<RequireAuth><Delete /></RequireAuth>} />
+        <Route path='/edit_sub' element={<RequireAuth><Edit_Sub /></RequireAuth>} />
+        <Route path='/edit_form' element={<RequireAuth><Edit_Form /></RequireAuth>} />
         <Route path='/about' element={<About />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
