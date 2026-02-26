@@ -101,7 +101,8 @@ function handleSubmit(e) {
 							id="name"
 							className="input"
 							type="text"
-							defaultValue="Disney+"
+							value={form.name}
+							onChange={handleChange}
 						/>
 					</div>
 
@@ -111,7 +112,8 @@ function handleSubmit(e) {
 							id="cost"
 							className="input"
 							type="text"
-							defaultValue="$4.99"
+							value={form.cost}
+							onChange={handleChange}
 						/>
 					</div>
 
@@ -121,17 +123,19 @@ function handleSubmit(e) {
 							id="cycle"
 							className="input"
 							type="text"
-							defaultValue="Monthly"
+							value={form.cycle}
+							onChange={handleChange}
 						/>
 					</div>
 
 					<div className="field">
 						<label htmlFor="last">Last billed</label>
 						<input
-							id="last"
+							id="billingDate"
 							className="input"
 							type="text"
-							defaultValue="Feb 1, 2026"
+							value={form.billingDate}
+							onChange={handleChange}
 						/>
 					</div>
 
@@ -141,7 +145,8 @@ function handleSubmit(e) {
 							id="category"
 							className="input"
 							type="text"
-							defaultValue="Entertainment"
+							value={form.category}
+							onChange={handleChange}
 						/>
 					</div>
 
