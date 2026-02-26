@@ -1,12 +1,18 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {setCurrentUser} from "../services/subscriptionService";
+import {setCurrentUser, logout, getCurrentUser} from "../services/subscriptionService";
 
 export function Login() {
+	const currentUser = getCurrentUser();
 	const navigate = useNavigate();
 
 	const[username, setUsername] = useState("");
 	const[password, setPassword] = useState("");
+
+	function handleLogout() {
+		logout()
+		navigate("/");
+	}
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -56,17 +62,35 @@ export function Login() {
 						</div>
 
 						<div className="button-row">
-							<button className="button-primary" type="submit">
-								Login
-							</button>
+							{currentUser ? (
+								<>
+									<p>
+										Logged in as <strong>{currentUser}</strong>
+									</p>
 
-							<button 
-								className="button-secondary"
-								type="button"
-								onClick={() => alert("sign up coming soon")}
-							>
-								Sign Up
-							</button>
+									<button
+										className="button-danger"
+										type="button"
+										onClick={handleLogout}
+									>
+										Logout
+									</button>
+								</>
+							) : (
+								<>
+									<button className="button-primary" type="submit">
+										Login
+									</button>
+
+									<button
+										className="button-secondary"
+										type="button"
+										onClick={() => alert("Sign Up coming soon. For now, just enter a username.")}
+									>
+										Sign Up
+									</button>
+								</>
+							)}
 						</div>
 					</form>
 				</div>
