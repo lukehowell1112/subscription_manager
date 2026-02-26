@@ -24,6 +24,7 @@ export function Login() {
 
 		setCurrentUser(username);
 		navigate("/dashboard");
+		window.location.reload();
 	}
 	return (
 		<main className="container main-wrap">

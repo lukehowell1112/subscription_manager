@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './app.css';
@@ -17,8 +17,19 @@ import { getCurrentUser, logout } from './services/subscriptionService';
 
 
 export default function App() {
-    const user = getCurrentUser();
-    
+    const [user, setUser] = useState(getCurrentUser());
+
+    useEffect(() => {
+        const syncUser = () => setUser(getCurrentUser());
+        window.addEventListener("storage", syncUser);
+        return () => window.removeEventListener("storage", syncUser);
+    }, []);
+
+    function handleLogout() {
+        logout();
+        setUser(null);
+    }
+
     return (
         <BrowserRouter>
         <div className="body">
@@ -33,23 +44,46 @@ export default function App() {
                         <nav className="site-nav">
                             <menu className="nav-list">
                                 <li><NavLink className="nav-link" to="/">Home</NavLink></li>
-                                <li><NavLink className="nav-link" to="dashboard">Dashboard</NavLink></li>
-                                <li className="dropdown">
-                                    <a
-                                        className="nav-link dropdown-toggle"
-                                        href="#"
-                                        role="button"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >Edit Dashboard</a>
+                                {user && (
+                                    <li>
+                                        <NavLink className="nav-link" to="/dashboard">
+                                            Dashboard
+                                        </NavLink>
+                                    </li>
+                                )}
 
-                                    <ul className="dropdown-menu dropdown-menu-dark">
-                                        <li><NavLink className="dropdown-item" to="add">Add Subscription</NavLink></li>
-                                        <li><NavLink className="dropdown-item" to="edit_sub">Edit Subscription</NavLink></li>
-                                        <li><NavLink className="dropdown-item" to="delete">Delete Subscription</NavLink></li>
-                                    </ul>
-                                </li>
-                                <li><NavLink className="nav-link" to="about">About</NavLink></li>
+                                {user && (
+                                    <li className="dropdown">
+                                        <a
+                                            className="nav-link dropdown-toggle"
+                                            href="#"
+                                            role="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                            Edit Dashboard
+                                        </a>
+
+                                        <ul className="dropdown-menu dropdown-menu-dark">
+                                            <li><NavLink className="dropdown-item" to="/add">Add Subscription</NavLink></li>
+                                            <li><NavLink className="dropdown-item" to="/edit_sub">Edit Subscription</NavLink></li>
+                                            <li><NavLink className="dropdown-item" to="/delete">Delete Subscription</NavLink></li>
+                                        </ul>
+                                    </li>
+                                )}
+                                <li><NavLink className="nav-link" to="/about">About</NavLink></li>
+
+                                {user && (
+                                    <li>
+                                        <button
+                                            className="nav-link"
+                                            type="button"
+                                            onClick={handleLogout}
+                                        >
+                                            Logout
+                                        </button>
+                                    </li>
+                                )}
                             </menu>
                         </nav>
                     </div>
@@ -80,5 +114,5 @@ export default function App() {
 }
 
 function NotFound() {
-  return <main classNameName="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
+  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }
