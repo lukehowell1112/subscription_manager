@@ -23,7 +23,7 @@ export function Edit_Sub() {
 		}
 
 		sessionStorage.setItem("editSelectedId", String(selectedId));
-		navigate("/edit-form")
+		navigate("/edit_form")
 	}
 	return (
 		<main className="container main-wrap">
