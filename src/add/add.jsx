@@ -111,12 +111,9 @@ export function Add() {
 							Return to Dashboard
 						</Link>
 
-						<Link
-							className="button-primary button-link"
-							to="/dashboard"
-						>
+						<button className="button-primary" type="submit">
 							Submit
-						</Link>
+						</button>
 					</div>
 				</form>
 			</section>
