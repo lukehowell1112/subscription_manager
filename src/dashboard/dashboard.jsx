@@ -11,6 +11,31 @@ export function Dashboard() {
 
     useEffect(() => {setSubscriptions(getSubscriptions());}, []);
     
+    const monthlyTotal = subscriptions.reduce(
+		(sum, sub) => sum + (Number(sub.cost) || 0),
+		0
+	);
+
+	const subscriptionCount = subscriptions.length;
+
+	const topCategory = (() => {
+		if (subscriptions.length === 0) return "—";
+
+		const counts = {};
+
+		for (const sub of subscriptions) {
+			const cat =
+				(sub.category || "Uncategorized").trim() ||
+				"Uncategorized";
+
+			counts[cat] = (counts[cat] || 0) + 1;
+		}
+
+		return Object
+			.entries(counts)
+			.sort((a, b) => b[1] - a[1])[0][0];
+	})();
+
     return (
         <main className="container main-wrap">
                 <div className="page-head">
@@ -71,17 +96,17 @@ export function Dashboard() {
                 <section className="summary-grid">
                     <div className="card summary-card">
                         <p className="summary-label">Monthly total</p>
-                        <p className="summary-value">$19.97</p>
+                        <p className="summary-value">${monthlyTotal.toFixed(2)}</p>
                     </div>
 
                     <div className="card summary-card">
                         <p className="summary-label">Subscriptions</p>
-                        <p className="summary-value">3</p>
+                        <p className="summary-value">{subscriptionCount}</p>
                     </div>
 
                     <div className="card summary-card">
                         <p className="summary-label">Top category</p>
-                        <p className="summary-value">Entertainment</p>
+                        <p className="summary-value">{topCategory}</p>
                     </div>
                 </section>
             </main>
