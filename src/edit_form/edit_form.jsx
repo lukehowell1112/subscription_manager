@@ -129,7 +129,7 @@ function handleSubmit(e) {
 					</div>
 
 					<div className="field">
-						<label htmlFor="last">Last billed</label>
+						<label htmlFor="last">Billing Date</label>
 						<input
 							id="billingDate"
 							className="input"
@@ -158,12 +158,9 @@ function handleSubmit(e) {
 							Cancel
 						</Link>
 
-						<Link
-							className="button-primary button-link"
-							to="/dashboard"
-						>
+						<button className="button-primary" type="submit">
 							Save changes
-						</Link>
+						</button>
 					</div>
 				</form>
 			</section>
