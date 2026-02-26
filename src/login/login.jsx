@@ -30,7 +30,7 @@ export function Login() {
 				<div className="card login-card">
 					<h3>Login</h3>
 
-					<form>
+					<form onSubmit={handleSubmit}>
 						<div className="field">
 							<label htmlFor="username">Username:</label>
 							<input
@@ -38,6 +38,8 @@ export function Login() {
 								className="input"
 								type="text"
 								placeholder="Enter your username"
+								value={username}
+								onChange={(e) => setUsername(e.target.value)}
 							/>
 						</div>
 
@@ -48,17 +50,23 @@ export function Login() {
 								className="input"
 								type="password"
 								placeholder="Enter your password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
 							/>
 						</div>
 
 						<div className="button-row">
-							<Link className="button-primary button-link" to="/dashboard">
+							<button className="button-primary" type="submit">
 								Login
-							</Link>
+							</button>
 
-							<Link className="button-secondary button-link" to="/dashboard">
+							<button 
+								className="button-secondary"
+								type="button"
+								onClick={() => alert("sign up coming soon")}
+							>
 								Sign Up
-							</Link>
+							</button>
 						</div>
 					</form>
 				</div>
