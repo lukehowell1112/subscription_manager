@@ -5,7 +5,7 @@ import {getSubscriptions, updateSubscription} from "../services/subscriptionServ
 export function Edit_Form() {
 	const navigate = useNavigate();
 
-	const [selectedId, setSelcetedId] = useState(null);
+	const [selectedId, setSelectedId] = useState(null);
 	const [form, setForm] = useState({
 		name: "",
 		cost: "",
@@ -17,7 +17,7 @@ export function Edit_Form() {
 	useEffect(() => {
 		const raw = sessionStorage.getItem("editSelectedId");
 		const id = raw ? Number(raw) : null;
-		setSelcetedId(id);
+		setSelectedId(id);
 
 		if (id == null) {
 			alert("No subscription selected to edit.");
@@ -118,7 +118,7 @@ function handleSubmit(e) {
 					</div>
 
 					<div className="field">
-						<label htmlFor="cycle">Billing cycle</label>
+						<label htmlFor="cycle">Billing Cycle</label>
 						<input
 							id="cycle"
 							className="input"
@@ -129,7 +129,7 @@ function handleSubmit(e) {
 					</div>
 
 					<div className="field">
-						<label htmlFor="last">Billing Date</label>
+						<label htmlFor="billingDate">Billing Date</label>
 						<input
 							id="billingDate"
 							className="input"
