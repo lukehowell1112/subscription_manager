@@ -3,6 +3,17 @@ import {Link, useNavigate} from "react-router-dom";
 import { getSubscriptions } from "../services/subscriptionService";
 
 export function Edit_Sub() {
+	const navigate = useNavigate();
+
+	const [subscriptions, setSubscriptions] = useState([]);
+	const [selectedId, setSelectedId] = useState(null)
+
+	useEffect(() => {
+		const subs = getSubscriptions();
+		setSubscriptions(subs);
+		setSelectedId(subs.length > 0 ? subs[0].id : null);
+	}, []);
+	
 	function handleContinue(e) {
 		e.preventDefault();
 
