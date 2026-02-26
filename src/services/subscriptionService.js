@@ -48,16 +48,23 @@ export function updateSubscription(id, updatedData) {
     saveSubscriptions(subscriptions);
 }
 
+function notifyAuthChanged() {
+	window.dispatchEvent(new Event("authchanged"));
+}
+
 export function setCurrentUser(username) {
 	const clean = String(username || "").trim();
 	if (!clean) throw new Error("Username required.");
 	localStorage.setItem(USER_KEY, clean);
+    notifyAuthChanged();
 }
 
 export function getCurrentUser() {
 	return localStorage.getItem(USER_KEY);
+    notifyAuthChanged();
 }
 
 export function logout() {
 	localStorage.removeItem(USER_KEY);
+    notifyAuthChanged();
 }

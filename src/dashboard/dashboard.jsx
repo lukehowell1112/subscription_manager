@@ -2,12 +2,24 @@ import React, {useEffect, useState} from 'react';
 import './app.css'
 import './dashboard.css'
 import './forms.css'
-import { getSubscriptions } from '../services/subscriptionService';
+import { getSubscriptions, getCurrentUser } from '../services/subscriptionService';
 
 import { Link } from "react-router-dom";
 
 export function Dashboard() {
     const [subscriptions, setSubscriptions] = useState([]);
+    const [user, setUser] = useState(getCurrentUser());
+
+	useEffect(() => {
+		const syncUser = () => setUser(getCurrentUser());
+		window.addEventListener("authchanged", syncUser);
+		window.addEventListener("storage", syncUser);
+
+		return () => {
+			window.removeEventListener("authchanged", syncUser);
+			window.removeEventListener("storage", syncUser);
+		};
+	}, []);
 
     useEffect(() => {setSubscriptions(getSubscriptions());}, []);
     
@@ -55,7 +67,7 @@ export function Dashboard() {
                 <div className="page-head">
                     <div>
                         <h2 className="page-title">Your Dashboard</h2>
-                        <p className="page-subtitle">User: <span className="pill">noobmaster69</span></p>
+                        <p className="page-subtitle">User: <span className="pill">{user || "Guest"}</span></p>
                     </div>
 
                     <div className="button-row">
