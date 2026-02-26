@@ -1,7 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import { getSubscriptions } from "../services/subscriptionService";
 
 export function Edit_Sub() {
+	function handleContinue(e) {
+		e.preventDefault();
+
+		if (selectedId == null) {
+			alert("Please select a subscription.")
+			return;
+		}
+
+		sessionStorage.setItem("editSelectedId", String(selectedId));
+		navigate("/edit-form")
+	}
 	return (
 		<main className="container main-wrap">
 			<div className="page-head">
@@ -12,7 +24,7 @@ export function Edit_Sub() {
 			</div>
 
 			<section className="card form-card">
-				<form className="vstack gap-3">
+				<form className="vstack gap-3" onSubmit={handleContinue}>
 					<div className="choice-list">
 						<label className="choice">
 							<input
@@ -40,9 +52,9 @@ export function Edit_Sub() {
 							Cancel
 						</Link>
 
-						<Link className="button-primary button-link" to="/edit_form">
+						<button className="button-primary" type="submit" disabled={getSubscriptions.length === 0}>
 							Continue
-						</Link>
+						</button>
 					</div>
 				</form>
 			</section>
