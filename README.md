@@ -86,8 +86,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - All functionality is complete. A user can sign in and add, delete, and edit their subscriptions. The app will display all subscriptions on the dashboard pay and calculate the monthly total, determine the most common category, etc. The app also saves information across users.
+- [x] **Hooks** - I used hooks all throughout my program. I used hooks like useState, useEffect, useNavigate, etc.
 
 ## 🚀 Service deliverable
 
