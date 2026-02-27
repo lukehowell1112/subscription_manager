@@ -44,7 +44,7 @@ export function Add() {
 			<section className="card form-card">
 				<form className="form-grid" onSubmit={handleSubmit}>
 					<div className="field">
-						<label htmlFor="name">Subscription name</label>
+						<label htmlFor="name">Subscription Name</label>
 						<input
 							id="name"
 							className="input"
@@ -56,7 +56,7 @@ export function Add() {
 					</div>
 
 					<div className="field">
-						<label htmlFor="cost">Fixed cost</label>
+						<label htmlFor="cost">Fixed Cost</label>
 						<input
 							id="cost"
 							className="input"
@@ -68,7 +68,7 @@ export function Add() {
 					</div>
 
 					<div className="field">
-						<label htmlFor="cycle">Billing cycle</label>
+						<label htmlFor="cycle">Billing Cycle</label>
 						<input
 							id="cycle"
 							className="input"
@@ -80,7 +80,7 @@ export function Add() {
 					</div>
 
 					<div className="field">
-						<label htmlFor="last">Billing date</label>
+						<label htmlFor="last">Next Billing Date</label>
 						<input
 							id="billingDate"
 							className="input"

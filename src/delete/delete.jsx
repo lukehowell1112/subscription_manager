@@ -40,7 +40,7 @@ export function Delete() {
 			<section className="card form-card danger-card">
 				<h3 className="danger-title">Choose a subscription</h3>
 				<p className="danger-text">
-					This action can’t be undone. (For this assignment it just returns to the dashboard.)
+					This action can’t be undone.
 				</p>
 
 				<form className="vstack gap-3" onSubmit={handleSubmit}>
