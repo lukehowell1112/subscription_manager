@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './app.css'
 import './dashboard.css'
 import './forms.css'
-import { getSubscriptions, getCurrentUser } from '../services/subscriptionService';
+import { getSubscriptions } from '../services/subscriptionService';
 
 import { Link } from "react-router-dom";
 
