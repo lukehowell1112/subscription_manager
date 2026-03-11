@@ -17,18 +17,39 @@ export function Add() {
 		setForm((prev) => ({...prev, [id]: value,}));
 	}
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
 
-		addSubscription({
+		const newSubscrition = {
 			name: form.name,
 			cost: Number(form.cost),
 			cycle: form.cycle,
 			billingDate: form.billingDate,
 			category: form.category,
-		});
-		navigate("/dashboard")
-	}
+		};
+
+		try {
+			const response = await fetch("/api/subscriptions", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(newSubscrition),
+			});
+
+			if (!response.ok) {
+				throw new Error("Failed to add subscription");
+			}
+
+			const savedSubscription = await response.json();
+			console.log("Saved subscription:", savedSubscription);
+
+			navigate("/dashboard");
+			} catch (error) {
+				console.error("Error adding subscription:", error);
+			}
+		}
+
 	return (
 		<main className="container main-wrap">
 			<div className="page-head">
