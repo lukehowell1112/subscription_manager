@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {addSubscription} from "../services/subscriptionService";
 
 export function Add() {
 	const navigate = useNavigate();

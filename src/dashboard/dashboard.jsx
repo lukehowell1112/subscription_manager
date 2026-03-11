@@ -21,7 +21,17 @@ export function Dashboard() {
 		};
 	}, []);
 
-    useEffect(() => {setSubscriptions(getSubscriptions());}, []);
+    useEffect(() => {
+        fetch('/api/subscriptions')
+            .then((res) => res.json())
+            .then((data) => {
+                console.log('Backend subscriptions:', data);
+                setSubscriptions(data);
+            })
+            .catch((err) => {
+                console.error('Error fetching subscriptions:', err);
+            });
+    }, []);
     
     function toMonthly(cost, cycle) {
         const c = Number(cost);
