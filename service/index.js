@@ -32,6 +32,24 @@ app.post('/api/subscriptions', (req, res) => {
   res.status(201).json(subscription);
 });
 
+app.put('/api/subscriptions/:id', (req, res) => {
+  const id = req.params.id;
+
+  const index = subscriptions.findIndex((sub) => sub.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ message: 'Subscription not found' });
+  }
+
+  subscriptions[index] = {
+    ...subscriptions[index],
+    ...req.body,
+    id: subscriptions[index].id,
+  };
+
+  res.json(subscriptions[index]);
+});
+
 app.delete('/api/subscriptions/:id', (req, res) => {
   const id = req.params.id;
   subscriptions = subscriptions.filter((sub) => sub.id !== id);
