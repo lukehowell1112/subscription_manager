@@ -20,7 +20,7 @@ export function Add() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 
-		const newSubscrition = {
+		const newSubscription = {
 			name: form.name,
 			cost: Number(form.cost),
 			cycle: form.cycle,
@@ -34,7 +34,7 @@ export function Add() {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(newSubscrition),
+				body: JSON.stringify(newSubscription),
 			});
 
 			if (!response.ok) {
