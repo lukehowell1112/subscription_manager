@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {getSubscriptions, updateSubscription} from "../services/subscriptionService";
 
 export function Edit_Form() {
 	const navigate = useNavigate();
@@ -16,7 +15,7 @@ export function Edit_Form() {
 
 	useEffect(() => {
 		const raw = sessionStorage.getItem("editSelectedId");
-		const id = raw ? Number(raw) : null;
+		const id = raw ? raw : null;
 		setSelectedId(id);
 
 		if (id == null) {
@@ -25,61 +24,85 @@ export function Edit_Form() {
 			return;
 		}
 
-		const subs = getSubscriptions();
-		const sub = subs.find((s) => s.id === id);
+		fetch("http://localhost:4000/api/subscriptions")
+			.then((res) => res.json())
+			.then((subs) => {
+				const sub = subs.find((s) => s.id === id);
 
-		if (!sub) {
-			alert("Could not find that subscription.");
-			navigate("/dashboard")
-			return;
-		}
+				if (!sub) {
+					alert("Could not find that subscription.");
+					navigate("/dashboard");
+					return;
+				}
 
-		setForm({
-			name: sub.name ?? "",
-			cost: String(sub.cost ?? ""),
-			cycle: sub.cycle ?? "",
-			billingDate: sub.billingDate ?? "",
-			category: sub.category ?? "",
-		});
+				setForm({
+					name: sub.name ?? "",
+					cost: String(sub.cost ?? ""),
+					cycle: sub.cycle ?? "",
+					billingDate: sub.billingDate ?? "",
+					category: sub.category ?? "",
+				});
+			})
+			.catch((err) => {
+				console.error("Error fetching subscriptions:", err);
+				alert("Failed to load subscription.");
+				navigate("/dashboard");
+			});
 	}, [navigate]);
 
 	function handleChange(e) {
-	const { id, value } = e.target;
-	setForm((prev) => ({ ...prev, [id]: value }));
-}
-
-function parseCost(costText) {
-	const cleaned = String(costText).replace(/[^0-9.]/g, "");
-	const num = Number(cleaned);
-	return Number.isFinite(num) ? num : NaN;
-}
-
-function handleSubmit(e) {
-	e.preventDefault();
-
-	if (selectedId == null) return;
-
-	const costNumber = parseCost(form.cost);
-
-	if (!form.name.trim()) {
-		alert("Please enter a subscription name.");
-		return;
-	}
-	if (!Number.isFinite(costNumber)) {
-		alert("Please enter a valid cost (example: 9.99).");
-		return;
+		const { id, value } = e.target;
+		setForm((prev) => ({ ...prev, [id]: value }));
 	}
 
-	updateSubscription(selectedId, {
-		name: form.name.trim(),
-		cost: costNumber,
-		cycle: form.cycle.trim(),
-		billingDate: form.billingDate.trim(),
-		category: form.category.trim(),
-	});
+	function parseCost(costText) {
+		const cleaned = String(costText).replace(/[^0-9.]/g, "");
+		const num = Number(cleaned);
+		return Number.isFinite(num) ? num : NaN;
+	}
 
-	sessionStorage.removeItem("editSelectedId");
-	navigate("/dashboard");
+	async function handleSubmit(e) {
+		e.preventDefault();
+
+		if (selectedId == null) return;
+
+		const costNumber = parseCost(form.cost);
+
+		if (!form.name.trim()) {
+			alert("Please enter a subscription name.");
+			return;
+		}
+
+		if (!Number.isFinite(costNumber)) {
+			alert("Please enter a valid cost (example: 9.99).");
+			return;
+		}
+
+		try {
+			const response = await fetch(`http://localhost:4000/api/subscriptions/${selectedId}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					name: form.name.trim(),
+					cost: costNumber,
+					cycle: form.cycle.trim(),
+					billingDate: form.billingDate.trim(),
+					category: form.category.trim(),
+				}),
+			});
+
+			if (!response.ok) {
+				throw new Error("Failed to update subscription");
+			}
+
+			sessionStorage.removeItem("editSelectedId");
+			navigate("/dashboard");
+		} catch (error) {
+			console.error("Error updating subscription:", error);
+			alert("Failed to update subscription.");
+		}
 	}
 
 	return (
