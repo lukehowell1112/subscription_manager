@@ -1,7 +1,7 @@
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 
@@ -12,23 +12,27 @@ app.use(cookieParser());
 let subscriptions = [];
 
 app.get('/api/subscriptions', (req, res) => {
-    res.send(subscriptions);
+    console.log('GET /api/subscriptions hit');
+    res.json(subscriptions);
 });
 
 app.post('/api/subscriptions', (req, res) => {
+    console.log('POST /api/subscriptions hit');
+    console.log('Body:', req.body);
+
     const subscription = {
         id: uuidv4(),
         ...req.body
     };
 
     subscriptions.push(subscription);
-    res.send(subscription);
+    res.status(201).json(subscription);
 });
 
 app.delete('/api/subscriptions/:id', (req, res) => {
     const id = req.params.id;
     subscriptions = subscriptions.filter(sub => sub.id !== id);
-    res.send({ message: "Deleted" });
+    res.json({ message: "Deleted" });
 });
 
 app.listen(port, () => {
