@@ -1,30 +1,36 @@
 import React, {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import { getSubscriptions } from "../services/subscriptionService";
 
 export function Edit_Sub() {
 	const navigate = useNavigate();
 
 	const [subscriptions, setSubscriptions] = useState([]);
-	const [selectedId, setSelectedId] = useState(null)
+	const [selectedId, setSelectedId] = useState(null);
 
 	useEffect(() => {
-		const subs = getSubscriptions();
-		setSubscriptions(subs);
-		setSelectedId(subs.length > 0 ? subs[0].id : null);
+		fetch("http://localhost:4000/api/subscriptions")
+			.then((res) => res.json())
+			.then((subs) => {
+				setSubscriptions(subs);
+				setSelectedId(subs.length > 0 ? subs[0].id : null);
+			})
+			.catch((err) => {
+				console.error("Error fetching subscriptions:", err);
+			});
 	}, []);
 
 	function handleContinue(e) {
 		e.preventDefault();
 
 		if (selectedId == null) {
-			alert("Please select a subscription.")
+			alert("Please select a subscription.");
 			return;
 		}
 
-		sessionStorage.setItem("editSelectedId", String(selectedId));
-		navigate("/edit_form")
+		sessionStorage.setItem("editSelectedId", selectedId);
+		navigate("/edit_form");
 	}
+
 	return (
 		<main className="container main-wrap">
 			<div className="page-head">
@@ -43,18 +49,13 @@ export function Edit_Sub() {
 							</p>
 						) : (
 							subscriptions.map((sub) => (
-								<label
-									className="choice"
-									key={sub.id}
-								>
+								<label className="choice" key={sub.id}>
 									<input
 										type="radio"
 										name="sub"
 										value={sub.id}
 										checked={selectedId === sub.id}
-										onChange={() =>
-											setSelectedId(sub.id)
-										}
+										onChange={() => setSelectedId(sub.id)}
 									/>
 
 									<span>
@@ -70,7 +71,11 @@ export function Edit_Sub() {
 							Cancel
 						</Link>
 
-						<button className="button-primary" type="submit" disabled={subscriptions.length === 0}>
+						<button
+							className="button-primary"
+							type="submit"
+							disabled={subscriptions.length === 0}
+						>
 							Continue
 						</button>
 					</div>
