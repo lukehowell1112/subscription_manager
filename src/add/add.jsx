@@ -19,7 +19,6 @@ export function Add() {
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		alert("submit fired");
 		console.log("Submit clicked");
 
 		const newSubscription = {

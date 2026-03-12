@@ -4,8 +4,6 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 
-console.log('uuidv4 type:', typeof uuidv4);
-
 const app = express();
 
 app.use(cors());
