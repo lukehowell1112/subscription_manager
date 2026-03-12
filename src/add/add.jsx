@@ -18,41 +18,42 @@ export function Add() {
 	}
 
 	async function handleSubmit(e) {
-	e.preventDefault();
-	console.log("Submit clicked");
+		e.preventDefault();
+		alert("submit fired");
+		console.log("Submit clicked");
 
-	const newSubscription = {
-		name: form.name,
-		cost: Number(form.cost),
-		cycle: form.cycle,
-		billingDate: form.billingDate,
-		category: form.category,
-	};
+		const newSubscription = {
+			name: form.name,
+			cost: Number(form.cost),
+			cycle: form.cycle,
+			billingDate: form.billingDate,
+			category: form.category,
+		};
 
-	console.log("Sending:", newSubscription);
+		console.log("Sending:", newSubscription);
 
-	try {
-		const response = await fetch("/api/subscriptions", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(newSubscription),
-		});
+		try {
+			const response = await fetch("/api/subscriptions", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(newSubscription),
+			});
 
-		console.log("Response received:", response.status);
+			console.log("Response received:", response.status);
 
-		if (!response.ok) {
-			throw new Error("Failed to add subscription");
+			if (!response.ok) {
+				throw new Error("Failed to add subscription");
+			}
+
+			const savedSubscription = await response.json();
+			console.log("Saved subscription:", savedSubscription);
+
+			navigate("/dashboard");
+		} catch (error) {
+			console.error("Error adding subscription:", error);
 		}
-
-		const savedSubscription = await response.json();
-		console.log("Saved subscription:", savedSubscription);
-
-		navigate("/dashboard");
-	} catch (error) {
-		console.error("Error adding subscription:", error);
-	}
 }
 
 	return (
