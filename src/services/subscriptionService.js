@@ -10,37 +10,11 @@ function subscriptionsKeyFor(user) {
 	return `subscriptions:${user}`;
 }
 
-export function getSubscriptions() {
-	const user = requireUser();
-	const key = subscriptionsKeyFor(user);
-
-	const data = localStorage.getItem(key);
-	return data ? JSON.parse(data) : [];
-}
-
 function saveSubscriptions(subscriptions) {
 	const user = requireUser();
 	const key = subscriptionsKeyFor(user);
 
 	localStorage.setItem(key, JSON.stringify(subscriptions));
-}
-
-export function addSubscription(subscription) {
-    const subscriptions = getSubscriptions();
-    const newSubscription = {
-        id: Date.now(),
-        ...subscription,
-    };
-
-    subscriptions.push(newSubscription);
-    saveSubscriptions(subscriptions);
-}
-
-export function deleteSubscription(id) {
-    const subscriptions = getSubscriptions().filter(
-        (sub) => sub.id !== id
-    );
-    saveSubscriptions(subscriptions);
 }
 
 export function updateSubscription(id, updatedData) {

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {getSubscriptions, deleteSubscription} from '../services/subscriptionService';
 
 export function Delete() {
 	const navigate = useNavigate();
@@ -9,21 +8,39 @@ export function Delete() {
 	const [selectedId, setSelectedId] = useState(null);
 
 	useEffect(() => {
-		const subs = getSubscriptions();
-		setSubscriptions(subs);
-		setSelectedId(subs.length > 0 ? subs[0].id : null);
+		fetch("http://localhost:4000/api/subscriptions")
+			.then((res) => res.json())
+			.then((subs) => {
+				setSubscriptions(subs);
+				setSelectedId(subs.length > 0 ? subs[0].id : null);
+			})
+			.catch((err) => {
+				console.error("Error fetching subscriptions:", err);
+			});
 	}, []);
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
 
-		if(selectedId == null) {
+		if (selectedId == null) {
 			alert("No subscription selected.");
 			return;
 		}
 
-		deleteSubscription(selectedId);
-		navigate("/dashboard");
+		try {
+			const response = await fetch(`http://localhost:4000/api/subscriptions/${selectedId}`, {
+				method: "DELETE",
+			});
+
+			if (!response.ok) {
+				throw new Error("Failed to delete subscription");
+			}
+
+			navigate("/dashboard");
+		} catch (error) {
+			console.error("Error deleting subscription:", error);
+			alert("Failed to delete subscription.");
+		}
 	}
 
 	return (
