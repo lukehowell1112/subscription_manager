@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 export function Dashboard() {
     const [subscriptions, setSubscriptions] = useState([]);
     const [user, setUser] = useState(getCurrentUser());
+    const [advice, setAdvice] = useState("");
 
 	useEffect(() => {
 		const syncUser = () => setUser(getCurrentUser());
@@ -30,6 +31,17 @@ export function Dashboard() {
             })
             .catch((err) => {
                 console.error('Error fetching subscriptions:', err);
+            });
+    }, []);
+
+    useEffect(() => {
+        fetch("https://api.adviceslip.com/advice")
+            .then((res) => res.json())
+            .then((data) => {
+                setAdvice(data.slip.advice);
+            })
+            .catch((err) => {
+                console.error("Error fetching advice:", err);
             });
     }, []);
     
@@ -79,6 +91,13 @@ export function Dashboard() {
                         <h2 className="page-title">Your Dashboard</h2>
                         <p className="page-subtitle">User: <span className="pill">{user || "Guest"}</span></p>
                     </div>
+
+                    <section className="card summary-card">
+                        <p className="summary-label">Financial Tip</p>
+                        <p className="summary-value" style={{fontSize: "1rem", lineHeight: "1.5"}}>
+                            {advice || "Loading advice..."}
+                        </p>
+                    </section>
 
                     <div className="button-row">
                         <Link to="/edit_sub" className="button-primary button-link">Edit</Link>
