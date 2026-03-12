@@ -22,7 +22,7 @@ export function Dashboard() {
 	}, []);
 
     useEffect(() => {
-        fetch('/api/subscriptions')
+        fetch('http://localhost:4000/api/subscriptions')
             .then((res) => res.json())
             .then((data) => {
                 console.log('Backend subscriptions:', data);
