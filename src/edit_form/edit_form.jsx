@@ -24,7 +24,9 @@ export function Edit_Form() {
 			return;
 		}
 
-		fetch("http://localhost:4000/api/subscriptions")
+		fetch("http://localhost:4000/api/subscriptions", {
+			credentials: "include",
+		})
 			.then((res) => res.json())
 			.then((subs) => {
 				const sub = subs.find((s) => s.id === id);
@@ -84,6 +86,7 @@ export function Edit_Form() {
 				headers: {
 					"Content-Type": "application/json",
 				},
+				credentials: "include",
 				body: JSON.stringify({
 					name: form.name.trim(),
 					cost: costNumber,
