@@ -93,12 +93,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - I used this functionality in index.js by importing express. Express creates the backend server that handles HTTP requests.
+- [x] **Static middleware for frontend** - I used static middleware in my index.js file with "app.use(express.static(...))" which serves the frontend.
+- [x] **Calls to third party endpoints** - On my dahsboard page I implemented a feature that gives a new quote every time the page is refreshed. It uses "api.adviceslip.com" to retrieve the quotes.
+- [x] **Backend service endpoints** - All of the API routes that I used are shown in the index.js file with app.get, app.delete, etc.
+- [x] **Frontend calls service endpoints** - In my jsx files calls are made to the backend using React through "fetch" to call the backend APIs.
+- [x] **Supports registration, login, logout, and restricted endpoint** - I included endpoints for the user registration, login, logout, and unauthorized access functionality.
 
 ## 🚀 DB deliverable
 
