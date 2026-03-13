@@ -3,6 +3,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
+const bcrypt = require('bcrypt');
 
 const app = express();
 
@@ -23,9 +24,9 @@ function findUser(field, value) {
 }
 
 function setAuthCookie(res, authToken) {
-  res.cookie('token', authToken, {
-    httpOnly: true,
-    sameSite: 'lax',
+    res.cookie('token', authToken, {
+        httpOnly: true,
+        sameSite: 'lax',
   });
 }
 
@@ -116,69 +117,77 @@ app.delete('/api/subscriptions/:id', (req, res) => {
 
 
 
-app.post('/api/auth/create', (req, res) => {
-  const { email, password } = req.body;
+app.post('/api/auth/create', async (req, res) => {
+    const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required' });
-  }
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Email and password are required' });
+    }
 
-  const existingUser = findUser('email', email);
-  if (existingUser) {
-    return res.status(409).json({ message: 'User already exists' });
-  }
+    const existingUser = findUser('email', email);
+    if (existingUser) {
+        return res.status(409).json({ message: 'User already exists' });
+    }
 
-  const user = {
-    id: uuidv4(),
-    email,
-    password,
-    token: uuidv4(),
-  };
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  users.push(user);
-  setAuthCookie(res, user.token);
+    const user = {
+        id: uuidv4(),
+        email,
+        password: hashedPassword,
+        token: uuidv4(),
+    };
 
-  res.json({ email: user.email });
-});
+    users.push(user);
+    setAuthCookie(res, user.token);
 
-app.post('/api/auth/login', (req, res) => {
-  const { email, password } = req.body;
+    res.json({ email: user.email });
+    });
 
-  const user = users.find((u) => u.email === email && u.password === password);
+    app.post('/api/auth/login', async (req, res) => {
+    const { email, password } = req.body;
 
-  if (!user) {
-    return res.status(401).json({ message: 'Invalid email or password' });
-  }
+    const user = users.find((u) => u.email === email);
 
-  user.token = uuidv4();
-  setAuthCookie(res, user.token);
+    if (!user) {
+        return res.status(401).json({ message: 'Invalid email or password' });
+    }
 
-  res.json({ email: user.email });
-});
+    const match = await bcrypt.compare(password, user.passowrd);
 
-app.delete('/api/auth/logout', (req, res) => {
-  const token = req.cookies?.token;
-  const user = users.find((u) => u.token === token);
+    if (!match) {
+        return res.status(401).json({ message: 'Invalid email or password' });
+    }
 
-  if (user) {
-    user.token = null;
-  }
+    user.token = uuidv4();
+    setAuthCookie(res, user.token);
 
-  res.clearCookie('token');
-  res.json({ message: 'Logged out' });
+    res.json({ email: user.email });
+    });
+
+    app.delete('/api/auth/logout', (req, res) => {
+    const token = req.cookies?.token;
+    const user = users.find((u) => u.token === token);
+
+    if (user) {
+        user.token = null;
+    }
+
+    res.clearCookie('token');
+    res.json({ message: 'Logged out' });
 });
 
 app.get('/api/user', (req, res) => {
-  const token = req.cookies?.token;
-  const user = users.find((u) => u.token === token);
+    const token = req.cookies?.token;
+    const user = users.find((u) => u.token === token);
 
-  if (!user) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
+    if (!user) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
 
-  res.json({ email: user.email });
+    res.json({ email: user.email });
 });
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+    console.log(`Listening on port ${port}`);
 });
