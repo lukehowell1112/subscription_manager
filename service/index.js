@@ -29,47 +29,89 @@ function setAuthCookie(res, authToken) {
   });
 }
 
+function getAuthUser(req) {
+    const token = req.cookies?.token;
+    return users.find((u) => u.token === token);
+}
+
 app.get('/api/subscriptions', (req, res) => {
-  console.log('GET /api/subscriptions hit');
-  res.json(subscriptions);
+    const user = getAuthUser(req);
+
+    if (!user) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const userSubscriptions = subscriptions.filter(
+        (sub) => sub.userId === user.id
+    );
+
+    res.json(userSubscriptions);
 });
 
 app.post('/api/subscriptions', (req, res) => {
-  console.log('POST /api/subscriptions hit');
-  console.log('Body:', req.body);
-  console.log('uuidv4 inside POST:', typeof uuidv4);
+    const user = getAuthUser(req);
 
-  const subscription = {
-    id: uuidv4(),
-    ...req.body,
-  };
+    if (!user) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
 
-  subscriptions.push(subscription);
-  res.status(201).json(subscription);
+    const subscription = {
+        id: uuidv4(),
+        userId: user.id,
+        ...req.body,
+    };
+
+    subscriptions.push(subscription);
+    res.status(201).json(subscription);
 });
 
 app.put('/api/subscriptions/:id', (req, res) => {
-  const id = req.params.id;
+    const user = getAuthUser(req);
 
-  const index = subscriptions.findIndex((sub) => sub.id === id);
+    if (!user) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
 
-  if (index === -1) {
-    return res.status(404).json({ message: 'Subscription not found' });
-  }
+    const id = req.params.id;
 
-  subscriptions[index] = {
-    ...subscriptions[index],
-    ...req.body,
-    id: subscriptions[index].id,
-  };
+    const index = subscriptions.findIndex(
+        (sub) => sub.id === id && sub.userId === user.id
+    );
 
-  res.json(subscriptions[index]);
+    if (index === -1) {
+        return res.status(404).json({ message: 'Subscription not found' });
+    }
+
+    subscriptions[index] = {
+        ...subscriptions[index],
+        ...req.body,
+        id: subscriptions[index].id,
+        userId: subscriptions[index].userId,
+    };
+
+    res.json(subscriptions[index]);
 });
 
 app.delete('/api/subscriptions/:id', (req, res) => {
-  const id = req.params.id;
-  subscriptions = subscriptions.filter((sub) => sub.id !== id);
-  res.json({ message: 'Deleted' });
+    const user = getAuthUser(req);
+
+    if (!user) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const id = req.params.id;
+
+    const originalLength = subscriptions.length;
+
+    subscriptions = subscriptions.filter(
+        (sub) => !(sub.id === id && sub.userId === user.id)
+    );
+
+    if (subscriptions.length === originalLength) {
+        return res.status(404).json({ message: 'Subscription not found' });
+    }
+
+    res.json({ message: 'Deleted' });
 });
 
 
