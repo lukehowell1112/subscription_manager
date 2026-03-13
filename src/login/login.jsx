@@ -1,32 +1,74 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {setCurrentUser, logout, getCurrentUser} from "../services/subscriptionService";
+import {
+	getCurrentUser,
+	loginUser,
+	signupUser,
+	logoutUser,
+} from "../services/subscriptionService";
 
 export function Login() {
 	const currentUser = getCurrentUser();
 	const navigate = useNavigate();
 
-	const[username, setUsername] = useState("");
-	const[password, setPassword] = useState("");
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
 
-	function handleLogout() {
-		logout()
-		window.location.reload();
-		navigate("/");
+	async function handleLogout() {
+		try {
+			await logoutUser();
+			window.location.reload();
+			navigate("/");
+		} catch (error) {
+			console.error("Logout error:", error);
+			alert("Failed to log out.");
+		}
 	}
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
 
-		if(!username.trim()) {
-			alert("Please enter a username.")
+		if (!username.trim()) {
+			alert("Please enter a username.");
 			return;
 		}
 
-		setCurrentUser(username);
-		navigate("/dashboard");
-		window.location.reload();
+		if (!password.trim()) {
+			alert("Please enter a password.");
+			return;
+		}
+
+		try {
+			await loginUser(username, password);
+			navigate("/dashboard");
+			window.location.reload();
+		} catch (error) {
+			console.error("Login error:", error);
+			alert(error.message);
+		}
 	}
+
+	async function handleSignup() {
+		if (!username.trim()) {
+			alert("Please enter a username.");
+			return;
+		}
+
+		if (!password.trim()) {
+			alert("Please enter a password.");
+			return;
+		}
+
+		try {
+			await signupUser(username, password);
+			navigate("/dashboard");
+			window.location.reload();
+		} catch (error) {
+			console.error("Signup error:", error);
+			alert(error.message);
+		}
+	}
+
 	return (
 		<main className="container main-wrap">
 			<section className="blah">
@@ -87,7 +129,7 @@ export function Login() {
 									<button
 										className="button-secondary"
 										type="button"
-										onClick={() => alert("Sign Up coming soon. For now, just enter a username.")}
+										onClick={handleSignup}
 									>
 										Sign Up
 									</button>
