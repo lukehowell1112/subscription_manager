@@ -1,4 +1,5 @@
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
+const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -15,15 +16,15 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static('public'));
 
 let subscriptions = [];
 let users = [];
 
 function findUser(field, value) {
-  return users.find((user) => user[field] === value);
+    return users.find((user) => user[field] === value);
 }
 
 function setAuthCookie(res, authToken) {
@@ -31,7 +32,7 @@ function setAuthCookie(res, authToken) {
         httpOnly: true,
         sameSite: 'lax',
         secure: true,
-  });
+    });
 }
 
 function getAuthUser(req) {
@@ -105,7 +106,6 @@ app.delete('/api/subscriptions/:id', (req, res) => {
     }
 
     const id = req.params.id;
-
     const originalLength = subscriptions.length;
 
     subscriptions = subscriptions.filter(
@@ -118,8 +118,6 @@ app.delete('/api/subscriptions/:id', (req, res) => {
 
     res.json({ message: 'Deleted' });
 });
-
-
 
 app.post('/api/auth/create', async (req, res) => {
     const { email, password } = req.body;
@@ -146,9 +144,9 @@ app.post('/api/auth/create', async (req, res) => {
     setAuthCookie(res, user.token);
 
     res.json({ email: user.email });
-    });
+});
 
-    app.post('/api/auth/login', async (req, res) => {
+app.post('/api/auth/login', async (req, res) => {
     const { email, password } = req.body;
 
     const user = users.find((u) => u.email === email);
@@ -167,9 +165,9 @@ app.post('/api/auth/create', async (req, res) => {
     setAuthCookie(res, user.token);
 
     res.json({ email: user.email });
-    });
+});
 
-    app.delete('/api/auth/logout', (req, res) => {
+app.delete('/api/auth/logout', (req, res) => {
     const token = req.cookies?.token;
     const user = users.find((u) => u.token === token);
 
@@ -190,6 +188,10 @@ app.get('/api/user', (req, res) => {
     }
 
     res.json({ email: user.email });
+});
+
+app.get(/.*/, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(port, () => {
