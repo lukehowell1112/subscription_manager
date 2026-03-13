@@ -40,7 +40,6 @@ export function Login() {
 		try {
 			await loginUser(username, password);
 			navigate("/dashboard");
-			window.location.reload();
 		} catch (error) {
 			console.error("Login error:", error);
 			alert(error.message);
@@ -61,7 +60,6 @@ export function Login() {
 		try {
 			await signupUser(username, password);
 			navigate("/dashboard");
-			window.location.reload();
 		} catch (error) {
 			console.error("Signup error:", error);
 			alert(error.message);
