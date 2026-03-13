@@ -37,6 +37,7 @@ export function Add() {
 				headers: {
 					"Content-Type": "application/json",
 				},
+				credentials: "include",
 				body: JSON.stringify(newSubscription),
 			});
 
