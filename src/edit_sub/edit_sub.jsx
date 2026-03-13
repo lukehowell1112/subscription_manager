@@ -8,7 +8,7 @@ export function Edit_Sub() {
 	const [selectedId, setSelectedId] = useState(null);
 
 	useEffect(() => {
-		fetch("http://localhost:4000/api/subscriptions", {
+		fetch("/api/subscriptions", {
 			credentials: "include",
 		})
 			.then((res) => res.json())

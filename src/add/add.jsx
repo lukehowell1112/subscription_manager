@@ -32,7 +32,7 @@ export function Add() {
 		console.log("Sending:", newSubscription);
 
 		try {
-			const response = await fetch("http://localhost:4000/api/subscriptions", {
+			const response = await fetch("/api/subscriptions", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

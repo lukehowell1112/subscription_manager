@@ -8,7 +8,7 @@ export function Delete() {
 	const [selectedId, setSelectedId] = useState(null);
 
 	useEffect(() => {
-		fetch("http://localhost:4000/api/subscriptions", {
+		fetch("/api/subscriptions", {
 			credentials: "include",
 		})
 			.then((res) => res.json())
@@ -30,7 +30,7 @@ export function Delete() {
 		}
 
 		try {
-			const response = await fetch(`http://localhost:4000/api/subscriptions/${selectedId}`, {
+			const response = await fetch(`/api/subscriptions/${selectedId}`, {
 				method: "DELETE",
 				credentials: "include",
 			});

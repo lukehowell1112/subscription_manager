@@ -24,7 +24,7 @@ export function Edit_Form() {
 			return;
 		}
 
-		fetch("http://localhost:4000/api/subscriptions", {
+		fetch("/api/subscriptions", {
 			credentials: "include",
 		})
 			.then((res) => res.json())
@@ -81,7 +81,7 @@ export function Edit_Form() {
 		}
 
 		try {
-			const response = await fetch(`http://localhost:4000/api/subscriptions/${selectedId}`, {
+			const response = await fetch(`/api/subscriptions/${selectedId}`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
