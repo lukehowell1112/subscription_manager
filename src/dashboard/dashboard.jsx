@@ -23,7 +23,9 @@ export function Dashboard() {
 	}, []);
 
     useEffect(() => {
-        fetch('http://localhost:4000/api/subscriptions')
+        fetch('http://localhost:4000/api/subscriptions', {
+            credentials: "include",
+        })
             .then((res) => res.json())
             .then((data) => {
                 console.log('Backend subscriptions:', data);
