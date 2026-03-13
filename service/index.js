@@ -153,7 +153,7 @@ app.post('/api/auth/create', async (req, res) => {
         return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const match = await bcrypt.compare(password, user.passowrd);
+    const match = await bcrypt.compare(password, user.password);
 
     if (!match) {
         return res.status(401).json({ message: 'Invalid email or password' });
