@@ -21,13 +21,23 @@ export default function App() {
 
     useEffect(() => {
         const syncUser = () => setUser(getCurrentUser());
+
+        window.addEventListener("authchanged", syncUser);
         window.addEventListener("storage", syncUser);
-        return () => window.removeEventListener("storage", syncUser);
+
+        return () => {
+            window.removeEventListener("authchanged", syncUser);
+            window.removeEventListener("storage", syncUser);
+        };
     }, []);
 
-    function handleLogout() {
-        logoutUser();
-        setUser(null);
+    async function handleLogout() {
+        try {
+            await logoutUser();
+            setUser(null);
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
     }
 
     return (
