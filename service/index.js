@@ -8,7 +8,10 @@ const bcrypt = require('bcrypt');
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: [
+        'http://localhost:5173',
+        'https://startup.subscriptionmanager.click',
+    ],
     credentials: true,
 }));
 
@@ -27,6 +30,7 @@ function setAuthCookie(res, authToken) {
     res.cookie('token', authToken, {
         httpOnly: true,
         sameSite: 'lax',
+        secure: true,
   });
 }
 
