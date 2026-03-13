@@ -8,7 +8,9 @@ export function Delete() {
 	const [selectedId, setSelectedId] = useState(null);
 
 	useEffect(() => {
-		fetch("http://localhost:4000/api/subscriptions")
+		fetch("http://localhost:4000/api/subscriptions", {
+			credentials: "include",
+		})
 			.then((res) => res.json())
 			.then((subs) => {
 				setSubscriptions(subs);
