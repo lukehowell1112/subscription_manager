@@ -17,8 +17,7 @@ export function Login() {
 	async function handleLogout() {
 		try {
 			await logoutUser();
-			window.location.reload();
-			navigate("/");
+			window.location.href = "/";
 		} catch (error) {
 			console.error("Logout error:", error);
 			alert("Failed to log out.");

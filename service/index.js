@@ -72,9 +72,7 @@ app.delete('/api/subscriptions/:id', (req, res) => {
   res.json({ message: 'Deleted' });
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+
 
 app.post('/api/auth/create', (req, res) => {
   const { email, password } = req.body;
@@ -137,4 +135,8 @@ app.get('/api/user', (req, res) => {
   }
 
   res.json({ email: user.email });
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
