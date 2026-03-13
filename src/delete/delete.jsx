@@ -32,6 +32,7 @@ export function Delete() {
 		try {
 			const response = await fetch(`http://localhost:4000/api/subscriptions/${selectedId}`, {
 				method: "DELETE",
+				credentials: "include",
 			});
 
 			if (!response.ok) {

@@ -149,7 +149,7 @@ app.post('/api/auth/create', async (req, res) => {
 
     const user = users.find((u) => u.email === email);
 
-    if (!user) {
+    if (!user || !user.password) {
         return res.status(401).json({ message: 'Invalid email or password' });
     }
 
