@@ -21,7 +21,7 @@ export function logoutLocal() {
 }
 
 export async function loginUser(username, password) {
-	const response = await fetch("http://localhost:4000/api/auth/login", {
+	const response = await fetch("/api/auth/login", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -44,7 +44,7 @@ export async function loginUser(username, password) {
 }
 
 export async function signupUser(username, password) {
-	const response = await fetch("http://localhost:4000/api/auth/create", {
+	const response = await fetch("/api/auth/create", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -67,7 +67,7 @@ export async function signupUser(username, password) {
 }
 
 export async function logoutUser() {
-	const response = await fetch("http://localhost:4000/api/auth/logout", {
+	const response = await fetch("/api/auth/logout", {
 		method: "DELETE",
 		credentials: "include",
 	});
