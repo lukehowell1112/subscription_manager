@@ -13,7 +13,7 @@ import { Edit_Sub } from './edit_sub/edit_sub';
 import { Edit_Form } from './edit_form/edit_form';
 import { About } from './about/about';
 import { RequireAuth } from "./auth/RequireAuth";
-import { getCurrentUser, logout } from './services/subscriptionService';
+import { getCurrentUser, logoutUser } from './services/subscriptionService';
 
 
 export default function App() {
@@ -26,7 +26,7 @@ export default function App() {
     }, []);
 
     function handleLogout() {
-        logout();
+        logoutUser();
         setUser(null);
     }
 
