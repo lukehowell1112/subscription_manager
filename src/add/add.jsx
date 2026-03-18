@@ -86,7 +86,8 @@ export function Add() {
 						<input
 							id="cost"
 							className="input"
-							type="text"
+							type="number"
+							step="0.01"
 							placeholder="$67.67"
 							value={form.cost}
 							onChange={handleChange}
