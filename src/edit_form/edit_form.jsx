@@ -41,7 +41,7 @@ export function Edit_Form() {
 					name: sub.name ?? "",
 					cost: String(sub.cost ?? ""),
 					cycle: sub.cycle ?? "",
-					billingDate: sub.billingDate ?? "",
+					billingDate: sub.billingDate ? sub.billingDate.split("T")[0] : "",
 					category: sub.category ?? "",
 				});
 			})
@@ -170,7 +170,7 @@ export function Edit_Form() {
 						<input
 							id="category"
 							className="input"
-							type="text"
+							type="date"
 							value={form.category}
 							onChange={handleChange}
 						/>

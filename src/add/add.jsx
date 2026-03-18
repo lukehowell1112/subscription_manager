@@ -124,6 +124,7 @@ export function Add() {
 							id="category"
 							className="input"
 							type="text"
+							placeholder="Entertainment, Health, Storage..."
 							value={form.category}
 							onChange={handleChange}
 						/>
