@@ -61,6 +61,28 @@ export function Dashboard() {
         return c;
     }
 
+    function formatDate(dateString) {
+        if (!dateString) return "";
+
+        const date = new Date(dateString);
+
+        const month = date.toLocaleString("en-US", { month: "long" });
+        const day = date.getDate();
+        const year = date.getFullYear();
+
+        function getSuffix(day) {
+            if (day >= 11 && day <= 13) return "th";
+            switch (day % 10) {
+                case 1: return "st";
+                case 2: return "nd";
+                case 3: return "rd";
+                default: return "th";
+            }
+        }
+
+        return `${month} ${day}${getSuffix(day)}, ${year}`;
+    }
+
     const monthlyTotal = subscriptions.reduce(
 		(sum, sub) => sum + toMonthly(sub.cost, sub.cycle),
         0
@@ -135,7 +157,7 @@ export function Dashboard() {
                                             <td>{sub.name}</td>
                                             <td>${Number(sub.cost).toFixed(2)}</td>
                                             <td>{sub.cycle}</td>
-                                            <td>{sub.billingDate}</td>
+                                            <td>{formatDate(sub.billingDate)}</td>
                                             <td>
                                                 <span className="tag">
                                                     {sub.category}
