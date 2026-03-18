@@ -159,7 +159,7 @@ export function Edit_Form() {
 						<input
 							id="billingDate"
 							className="input"
-							type="text"
+							type="date"
 							value={form.billingDate}
 							onChange={handleChange}
 						/>
@@ -170,7 +170,7 @@ export function Edit_Form() {
 						<input
 							id="category"
 							className="input"
-							type="date"
+							type="text"
 							value={form.category}
 							onChange={handleChange}
 						/>
