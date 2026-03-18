@@ -88,7 +88,7 @@ export function Add() {
 							className="input"
 							type="number"
 							step="0.01"
-							placeholder="$67.67"
+							placeholder="67.67"
 							value={form.cost}
 							onChange={handleChange}
 						/>
