@@ -330,3 +330,8 @@ label {
   .blah { grid-template-columns: 1fr; }
   .blah-text h2 { font-size: 32px; }
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
