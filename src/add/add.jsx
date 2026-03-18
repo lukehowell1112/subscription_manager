@@ -106,11 +106,11 @@ export function Add() {
 					</div>
 
 					<div className="field">
-						<label htmlFor="last">Next Billing Date</label>
+						<label htmlFor="billingDate">Next Billing Date</label>
 						<input
 							id="billingDate"
 							className="input"
-							type="text"
+							type="date"
 							placeholder="Wenduary 56th, 3005"
 							value={form.billingDate}
 							onChange={handleChange}
@@ -123,7 +123,6 @@ export function Add() {
 							id="category"
 							className="input"
 							type="text"
-							placeholder="Entertainment, Health, Work..."
 							value={form.category}
 							onChange={handleChange}
 						/>
