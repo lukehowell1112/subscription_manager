@@ -63,12 +63,13 @@ export function Dashboard() {
 
     function formatDate(dateString) {
         if (!dateString) return "";
+        const [year, month, day] = dateString.split("-").map(Number);
 
-        const date = new Date(dateString);
+        const date = new Date(year, month - 1, day);
 
-        const month = date.toLocaleString("en-US", { month: "long" });
-        const day = date.getDate();
-        const year = date.getFullYear();
+        const monthName = date.toLocaleString("en-US", { month: "long" });
+        const dayNum = date.getDate();
+        const yearNum = date.getFullYear();
 
         function getSuffix(day) {
             if (day >= 11 && day <= 13) return "th";
@@ -80,7 +81,7 @@ export function Dashboard() {
             }
         }
 
-        return `${month} ${day}${getSuffix(day)}, ${year}`;
+        return `${monthName} ${dayNum}${getSuffix(dayNum)}, ${yearNum}`;
     }
 
     const monthlyTotal = subscriptions.reduce(
