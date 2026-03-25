@@ -104,8 +104,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [x] **Stores data in MongoDB** - Data is stored in MongoDB which is evident in my dadbase.js and index.js files.
+- [x] **Stores credentials in MongoDB** - Credentials are also stored in MongoDB, when a new ueser signs up their information is stored there and the password is encrypted.
 
 ## 🚀 WebSocket deliverable
 
