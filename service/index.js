@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt');
 const DB = require('./database');
 
 const app = express();
+const publicPath = path.join(__dirname, 'public');
 
 app.use(cors({
 	origin: [
@@ -19,7 +20,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static('public'));
+app.use(express.static(publicPath));
 
 function setAuthCookie(res, authToken) {
 	res.cookie('token', authToken, {
@@ -175,7 +176,7 @@ app.get('/api/user', async (req, res) => {
 });
 
 app.get(/.*/, (req, res) => {
-	res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 app.listen(port, () => {
