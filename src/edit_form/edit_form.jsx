@@ -40,7 +40,7 @@ export function Edit_Form() {
 				setForm({
 					name: sub.name ?? "",
 					cost: String(sub.cost ?? ""),
-					cycle: sub.cycle ?? "",
+					cycle: sub.cycle ? sub.cycle.toLowerCase() : "",
 					billingDate: sub.billingDate ? sub.billingDate.split("T")[0] : "",
 					category: sub.category ?? "",
 				});
