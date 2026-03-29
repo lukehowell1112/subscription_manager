@@ -154,9 +154,12 @@ export function Edit_Form() {
 							onChange={handleChange}
 						>
 							<option value="">Select a billing cycle</option>
-							<option value="monthly">Monthly</option>
-							<option value="yearly">Yearly</option>
-							<option value="weekly">Weekly</option>
+
+								{cycleOptions.map((option) => (
+									<option key={option} value={option}>
+										{option.charAt(0).toUpperCase() + option.slice(1)}
+									</option>
+								))}
 						</select>
 					</div>
 
