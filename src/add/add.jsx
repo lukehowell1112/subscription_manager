@@ -106,7 +106,7 @@ export function Add() {
 						>
 							
 							<option value="">Select a billing cycle</option>
-							
+
 								{cycleOptions.map((option) => (
 									<option key={option} value={option}>
 										{option.charAt(0).toUpperCase() + option.slice(1)}
@@ -135,7 +135,7 @@ export function Add() {
 							value={form.category}
 							onChange={handleChange}
 						>
-							<option value="">Select a cetegory</option>
+							<option value="">Select a category</option>
 							<option value="entertainment">Entertainment</option>
 							<option value="storage">Storage</option>
 							<option value="work">Work</option>
