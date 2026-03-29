@@ -123,7 +123,7 @@ export function Dashboard() {
         <main className="container main-wrap">
                 <div className="page-head">
                     <div>
-                        <h2 className="page-title">Your Dashboard</h2>
+                        <h2 className="page-title">My Dashboard</h2>
                         <p className="page-subtitle">User: <span className="pill">{user || "Guest"}</span></p>
                     </div>
 
