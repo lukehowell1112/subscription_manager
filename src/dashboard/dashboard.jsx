@@ -171,7 +171,8 @@ export function Dashboard() {
                                             <td>{formatDate(sub.billingDate)}</td>
                                             <td>
                                                 <span className={`tag ${getCategoryClass(sub.category)}`}>
-                                                    {sub.category}
+                                                    {sub.category
+                                                        ? sub.category.charAt(0).toUpperCase() + sub.category.slice(1) : "Other"}
                                                 </span>
                                             </td>
                                         </tr>
