@@ -167,7 +167,10 @@ export function Dashboard() {
                                         <tr key={sub.id}>
                                             <td>{sub.name}</td>
                                             <td>${Number(sub.cost).toFixed(2)}</td>
-                                            <td>{sub.cycle}</td>
+                                            <td>{sub.cycle
+                                                ? sub.cycle.charAt(0).toUpperCase() + sub.cycle.slice(1)
+                                                : ""}
+                                            </td>
                                             <td>{formatDate(sub.billingDate)}</td>
                                             <td>
                                                 <span className={`tag ${getCategoryClass(sub.category)}`}>
@@ -197,7 +200,11 @@ export function Dashboard() {
 
                     <div className="card summary-card">
                         <p className="summary-label">Top category</p>
-                        <p className="summary-value">{topCategory}</p>
+                        <p className="summary-value">
+                            {topCategory && topCategory !== "—"
+                                ? topCategory.charAt(0).toUpperCase() + topCategory.slice(1)
+                                : topCategory}
+                        </p>
                     </div>
                 </section>
             </main>
