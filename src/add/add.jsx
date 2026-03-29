@@ -4,6 +4,8 @@ import {Link, useNavigate} from "react-router-dom";
 export function Add() {
 	const navigate = useNavigate();
 
+	const cycleOptions = ["monthly", "yearly", "weekly"];
+
 	const [form, setForm] = useState({
 		name: "",
 		cost: "",
@@ -102,10 +104,14 @@ export function Add() {
 							value={form.cycle}
 							onChange={handleChange}
 						>
+							
 							<option value="">Select a billing cycle</option>
-							<option value="monthly">Monthly</option>
-							<option value="yearly">Yearly</option>
-							<option value="weekly">Weekly</option>
+							
+								{cycleOptions.map((option) => (
+									<option key={option} value={option}>
+										{option.charAt(0).toUpperCase() + option.slice(1)}
+									</option>
+								))}
 						</select>
 					</div>
 
