@@ -167,13 +167,20 @@ export function Edit_Form() {
 
 					<div className="field">
 						<label htmlFor="category">Category</label>
-						<input
+						<select
 							id="category"
 							className="input"
-							type="text"
 							value={form.category}
 							onChange={handleChange}
-						/>
+						>
+							<option value="">Select a cetegory</option>
+							<option value="entertainment">Entertainment</option>
+							<option value="storage">Storage</option>
+							<option value="work">Work</option>
+							<option value="health">Health</option>
+							<option value="school">School</option>
+							<option value="other">Other</option>
+						</select>
 					</div>
 
 					<div className="button-row field-wide">
