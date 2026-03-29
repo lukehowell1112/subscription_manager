@@ -96,14 +96,17 @@ export function Add() {
 
 					<div className="field">
 						<label htmlFor="cycle">Billing Cycle</label>
-						<input
+						<select
 							id="cycle"
 							className="input"
-							type="text"
-							placeholder="Monthly, Yearly, Weekly..."
 							value={form.cycle}
 							onChange={handleChange}
-						/>
+						>
+							<option value="">Select a billing cycle</option>
+							<option value="monthly">Monthly</option>
+							<option value="yearly">Yearly</option>
+							<option value="weekly">Weekly</option>
+						</select>
 					</div>
 
 					<div className="field">
