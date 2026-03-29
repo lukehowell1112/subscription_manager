@@ -84,6 +84,16 @@ export function Dashboard() {
         return `${monthName} ${dayNum}${getSuffix(dayNum)}, ${yearNum}`;
     }
 
+    function getCategoryClass(category) {
+        const normalized = String(category || "")
+            .trim()
+            .toLowerCase();
+        
+        if (!normalized) return "tag-other";
+
+        return `tag-${normalized}`
+    }
+
     const monthlyTotal = subscriptions.reduce(
 		(sum, sub) => sum + toMonthly(sub.cost, sub.cycle),
         0
@@ -160,7 +170,7 @@ export function Dashboard() {
                                             <td>{sub.cycle}</td>
                                             <td>{formatDate(sub.billingDate)}</td>
                                             <td>
-                                                <span className="tag">
+                                                <span className={`tag ${getCategoryClass(sub.category)}`}>
                                                     {sub.category}
                                                 </span>
                                             </td>
