@@ -4,6 +4,8 @@ import {Link, useNavigate} from "react-router-dom";
 export function Edit_Form() {
 	const navigate = useNavigate();
 
+	const cycleOptions = ["monthly", "yearly", "weekly"];
+
 	const [selectedId, setSelectedId] = useState(null);
 	const [form, setForm] = useState({
 		name: "",
