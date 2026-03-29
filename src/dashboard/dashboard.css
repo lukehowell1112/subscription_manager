@@ -79,17 +79,6 @@
   color: var(--text);
 }
 
-/* category tags */
-.tag {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  border: 1px solid rgba(96, 165, 250, 0.35);
-  background: rgba(96, 165, 250, 0.14);
-  color: var(--text);
-}
-
 /* category colors */
 .tag-entertainment {
   border-color: rgba(244, 114, 182, 0.45);
