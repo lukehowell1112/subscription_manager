@@ -135,6 +135,8 @@
   background-repeat: no-repeat;
   background-position: right 14px center;
   background-size: 16px;
+
+  color: var(--muted)
 }
 
 .select-input::-ms-expand {
