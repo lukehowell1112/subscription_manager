@@ -37,14 +37,30 @@ export function Dashboard() {
     }, []);
 
     useEffect(() => {
-        fetch("https://api.adviceslip.com/advice")
-            .then((res) => res.json())
-            .then((data) => {
-                setAdvice(data.slip.advice);
-            })
-            .catch((err) => {
-                console.error("Error fetching advice:", err);
-            });
+	fetch("https://api.api-ninjas.com/v2/randomquotes?categories=success", {
+		headers: {
+			"X-Api-Key": "XMPyUvvD5Wd2leU4Nv30KSV7823kSu09paEL8fRp",
+		},
+	})
+		.then((res) => {
+			if (!res.ok) {
+				throw new Error(`HTTP ${res.status}`);
+			}
+			return res.json();
+		})
+		.then((data) => {
+			console.log("Quote API response:", data);
+
+			if (data && data.length > 0) {
+				setAdvice(data[0].quote);
+			} else {
+				setAdvice("No quote available right now.");
+			}
+		})
+		.catch((err) => {
+			console.error("Error fetching quote:", err);
+			setAdvice("Failed to load quote.");
+		});
     }, []);
     
     function toMonthly(cost, cycle) {
