@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import "../forms.css";
 
 export function Edit_Form() {
 	const navigate = useNavigate();
@@ -149,7 +150,7 @@ export function Edit_Form() {
 						<label htmlFor="cycle">Billing Cycle</label>
 						<select
 							id="cycle"
-							className="input"
+							className="input select-input"
 							value={form.cycle}
 							onChange={handleChange}
 						>
@@ -178,7 +179,7 @@ export function Edit_Form() {
 						<label htmlFor="category">Category</label>
 						<select
 							id="category"
-							className="input"
+							className="input select-input"
 							value={form.category}
 							onChange={handleChange}
 						>

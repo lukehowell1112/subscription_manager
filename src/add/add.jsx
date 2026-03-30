@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import "../forms.css";
 
 export function Add() {
 	const navigate = useNavigate();
@@ -100,7 +101,7 @@ export function Add() {
 						<label htmlFor="cycle">Billing Cycle</label>
 						<select
 							id="cycle"
-							className="input"
+							className="input select-input"
 							value={form.cycle}
 							onChange={handleChange}
 						>
@@ -131,7 +132,7 @@ export function Add() {
 						<label htmlFor="category">Category</label>
 						<select
 							id="category"
-							className="input"
+							className="input select-input"
 							value={form.category}
 							onChange={handleChange}
 						>
