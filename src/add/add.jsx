@@ -22,7 +22,6 @@ export function Add() {
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		console.log("Submit clicked");
 
 		const newSubscription = {
 			name: form.name,
@@ -31,8 +30,6 @@ export function Add() {
 			billingDate: form.billingDate,
 			category: form.category,
 		};
-
-		console.log("Sending:", newSubscription);
 
 		try {
 			const response = await fetch("/api/subscriptions", {
@@ -44,14 +41,9 @@ export function Add() {
 				body: JSON.stringify(newSubscription),
 			});
 
-			console.log("Response received:", response.status);
-
 			if (!response.ok) {
 				throw new Error("Failed to add subscription");
 			}
-
-			const savedSubscription = await response.json();
-			console.log("Saved subscription:", savedSubscription);
 
 			navigate("/dashboard");
 		} catch (error) {
