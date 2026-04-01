@@ -28,7 +28,6 @@ export function Dashboard() {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log('Backend subscriptions:', data);
                 setSubscriptions(data);
             })
             .catch((err) => {
@@ -49,8 +48,6 @@ export function Dashboard() {
 			return res.json();
 		})
 		.then((data) => {
-			console.log("Quote API response:", data);
-
 			if (data && data.length > 0) {
 				setAdvice(data[0].quote);
 			} else {
