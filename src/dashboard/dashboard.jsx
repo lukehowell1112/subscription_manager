@@ -39,7 +39,7 @@ export function Dashboard() {
     useEffect(() => {
 	fetch("https://api.api-ninjas.com/v2/randomquotes?categories=success", {
 		headers: {
-			"X-Api-Key": "XMPyUvvD5Wd2leU4Nv30KSV7823kSu09paEL8fRp",
+			"X-Api-Key": import.meta.env.VITE_QUOTES_API_KEY,
 		},
 	})
 		.then((res) => {

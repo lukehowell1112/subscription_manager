@@ -1,3 +1,4 @@
 node_modules/
 dbConfig.json
 lukehowell.pem
+.env
