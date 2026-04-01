@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './app.css'
 import './dashboard.css'
-import './forms.css'
+import '../forms.css'
 import { getCurrentUser } from '../services/subscriptionService';
 
 import { Link } from "react-router-dom";
