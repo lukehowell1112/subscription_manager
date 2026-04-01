@@ -183,7 +183,7 @@ export function Edit_Form() {
 							value={form.category}
 							onChange={handleChange}
 						>
-							<option value="">Select a cetegory</option>
+							<option value="">Select a category</option>
 							<option value="entertainment">Entertainment</option>
 							<option value="storage">Storage</option>
 							<option value="work">Work</option>
