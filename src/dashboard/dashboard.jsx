@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import './app.css'
 import './dashboard.css'
 import '../forms.css'
@@ -11,6 +11,9 @@ export function Dashboard() {
     const [user, setUser] = useState(getCurrentUser());
     const [advice, setAdvice] = useState("");
 
+    const socketRef = useRef(null);
+    const [liveMessage, setLiveMessage] = useState("");
+
 	useEffect(() => {
 		const syncUser = () => setUser(getCurrentUser());
 		window.addEventListener("authchanged", syncUser);
@@ -22,7 +25,7 @@ export function Dashboard() {
 		};
 	}, []);
 
-    useEffect(() => {
+    function loadSubscriptions() {
         fetch('/api/subscriptions', {
             credentials: "include",
         })
@@ -33,6 +36,10 @@ export function Dashboard() {
             .catch((err) => {
                 console.error('Error fetching subscriptions:', err);
             });
+    }
+
+    useEffect(() => {
+        loadSubscriptions();
     }, []);
 
     useEffect(() => {
