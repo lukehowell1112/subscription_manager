@@ -35,7 +35,7 @@ export function Dashboard() {
         })
             .then((res) => res.json())
             .then((data) => {
-                setSubscriptions(data);
+                setSubscriptions(Array.isArray(data) ? data : []);
             })
             .catch((err) => {
                 console.error('Error fetching subscriptions:', err);

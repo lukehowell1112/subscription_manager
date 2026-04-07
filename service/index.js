@@ -325,16 +325,17 @@ app.post('/api/auth/create', async (req, res) => {
 	}
 
 	const hashedPassword = await bcrypt.hash(password, 10);
+	const newToken = uuidv4();
 
 	const user = {
 		id: uuidv4(),
 		email,
 		password: hashedPassword,
-		token: uuidv4(),
+		tokens: [newToken],
 	};
 
 	await DB.addUser(user);
-	setAuthCookie(res, user.token);
+	setAuthCookie(res, newToken);
 
 	res.json({ email: user.email });
 });
@@ -354,9 +355,13 @@ app.post('/api/auth/login', async (req, res) => {
 		return res.status(401).json({ message: 'Invalid email or password' });
 	}
 
-	user.token = uuidv4();
+	const newToken = uuidv4();
+	const tokens = Array.isArray(user.tokens) ? user.tokens : (user.token ? [user.token] : []);
+	tokens.push(newToken);
+	user.tokens = tokens;
+	delete user.token;
 	await DB.updateUser(user);
-	setAuthCookie(res, user.token);
+	setAuthCookie(res, newToken);
 
 	res.json({ email: user.email });
 });
@@ -366,7 +371,7 @@ app.delete('/api/auth/logout', async (req, res) => {
 	const user = token ? await DB.getUserByToken(token) : null;
 
 	if (user) {
-		await DB.clearUserToken(user.id);
+		await DB.removeUserToken(user.id, token);
 	}
 
 	res.clearCookie('token');
