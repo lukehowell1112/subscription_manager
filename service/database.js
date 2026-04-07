@@ -97,6 +97,7 @@ module.exports = {
 	addSubscription,
 	updateSubscription,
 	deleteSubscription,
+	addDashboardShare,
 	getDashboardShare,
 	getDashboardSharesByOwnerId,
 	getDashboardSharesByViewerId,
