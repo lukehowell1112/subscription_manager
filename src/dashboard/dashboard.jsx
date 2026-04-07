@@ -29,6 +29,19 @@ export function Dashboard() {
 		};
 	}, []);
 
+    function loadSubscriptions() {
+        fetch('/api/subscriptions', {
+            credentials: "include",
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setSubscriptions(data);
+            })
+            .catch((err) => {
+                console.error('Error fetching subscriptions:', err);
+            });
+    }
+
     function loadSharedDashboards() {
         fetch('/api/shared-with-me', {
             credentials: "include",
