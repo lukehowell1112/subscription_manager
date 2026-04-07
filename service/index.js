@@ -201,6 +201,24 @@ app.get('/api/shared-with-me', async (req, res) => {
 	res.json(sharedDashboards);
 });
 
+app.delete('/api/shared-with-me/:shareId', async (req, res) => {
+	const user = await getAuthUser(req);
+
+	if (!user) {
+		return res.status(401).json({ message: 'Unauthorized' });
+	}
+
+	const shareId = req.params.shareId;
+
+	const deleted = await DB.deleteDashboardShareById(shareId, user.id);
+
+	if (!deleted) {
+		return res.status(404).json({ message: 'Shared dashboard not found' });
+	}
+
+	res.json({ message: 'Shared dashboard removed' });
+});
+
 app.get('/api/subscriptions', async (req, res) => {
 	const user = await getAuthUser(req);
 
