@@ -111,8 +111,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - index.js uses wss.on("connection", ...) and listens for incoming websocket connections. It also extracts the auth token from the cookie header and connects userId and userEmail to the socket so it knows who's connected.
+- [x] **Frontend makes WebSocket connection** - A websocket url is created when the dashboard mounts inside a useEffect.
+- [x] **Data sent over WebSocket connection** - The serveer sends information to the client and from the client to the server.
+- [x] **WebSocket data displayed** - The user will receive messages and live updates through a toast notifiaction through setLiveMessage.
+- [x] **Application is fully functional** - That's a wrap!
