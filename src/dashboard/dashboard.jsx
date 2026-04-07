@@ -447,7 +447,7 @@ export function Dashboard() {
                 </section>
                 {sharedDashboards.length > 0 && (
                     <section className="shared-section">
-                        <div className="page-head" style={{ marginTop: "24px" }}>
+                        <div className="page-head" style={{ marginTop: "48px" }}>
                             <div>
                                 <h2 className="page-title">Shared Dashboards</h2>
                                 <p className="page-subtitle">
