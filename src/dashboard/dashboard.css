@@ -4,7 +4,7 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 18px;
-  margin-bottom: 18px;
+  margin-bottom: 15px;
 }
 
 .page-title {
@@ -154,14 +154,12 @@
 
 
 .page-head .summary-card {
-    max-width: 360px;
+    max-width: 600px;
 }
 
-/* Make the dashboard button row wrap nicely */
-.page-head .button-row {
-  margin-top: 0;       /* overrides main.css default spacing */
-  flex-wrap: wrap;
-  justify-content: flex-end;
+/* Make the dashboard actions align to the right of the page header */
+.page-head .dashboard-actions {
+  margin-top: 0;
 }
 
 .live-toast {
@@ -206,15 +204,40 @@
 	}
 }
 
+.dashboard-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    align-self: stretch;
+    gap: 10px;
+}
+
+.dashboard-actions .button-row {
+    margin-top: 0;
+    width: 100%;
+}
+
+.dashboard-actions .button-row .button-primary,
+.dashboard-actions .button-row .button-secondary {
+    white-space: nowrap;
+    flex: 1;
+}
+
 .share-form {
 	display: flex;
 	gap: 10px;
 	align-items: center;
-	flex-wrap: wrap;
+    width: 100%;
 }
 
 .share-form .input {
-	min-width: 220px;
+	flex: 1;
+}
+
+.share-form-btn {
+    flex: none;
+    white-space: nowrap;
 }
 
 .shared-section {
