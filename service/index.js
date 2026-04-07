@@ -146,7 +146,7 @@ app.put('/api/subscriptions/:id', async (req, res) => {
 	broadcast({
 		type: "subscription_updated",
 		subscription: updatedSubscription,
-		message: `Subscription "${subscription.name}" added`
+		message: `Subscription "${updatedSubscription.name}" updated`
 	});
 
 	res.json(updatedSubscription);

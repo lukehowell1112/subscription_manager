@@ -89,26 +89,12 @@ export function Dashboard() {
                     setLiveMessage(data.message);
                 }
 
-                if (data.type === "subscription_added" && data.subscription) {
-                    setSubscriptions((prev) => {
-                        const exists = prev.some((sub) => sub.id === data.subscription.id);
-                        if (exists) return prev;
-                        return [...prev, data.subscription];
-                    });
-                }
-
-                if (data.type === "subscription_updated" && data.subscription) {
-                    setSubscriptions((prev) =>
-                        prev.map((sub) =>
-                            sub.id === data.subscription.id ? data.subscription : sub
-                        )
-                    );
-                }
-
-                if (data.type === "subscription_deleted" && data.id) {
-                    setSubscriptions((prev) =>
-                        prev.filter((sub) => sub.id !== data.id)
-                    );
+                if (
+                    data.type === "subscription_added" ||
+                    data.type === "subscription_updated" ||
+                    data.type === "subscription_deleted"
+                ) {
+                    loadSubscriptions();
                 }
             } catch (err) {
                 console.error("WS parse error:", err);
