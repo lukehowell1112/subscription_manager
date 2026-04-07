@@ -76,10 +76,10 @@ wss.on("connection", (ws) => {
 			}
 
 			if (data.type === "share_dashboard") {
-				ws.send(JSON.stringify({
+				broadcast({
 					type: "notification",
 					message: "Dashboard sharing started!"
-				}));
+				});
 			}
 		} catch (err) {
 			console.error("Invalid WebSocket message:", err);
