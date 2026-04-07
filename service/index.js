@@ -55,8 +55,41 @@ function broadcast(data) {
 	});
 }
 
-wss.on("connection", (ws) => {
+async function broadcastDashboardUpdate(ownerUserId, data) {
+	const shares = await DB.getDashboardSharesByOwnerId(ownerUserId);
+
+	const allowedUserIds = new Set([ownerUserId]);
+	for (const share of shares) {
+		allowedUserIds.add(share.viewerUserId);
+	}
+
+	const message = JSON.stringify(data);
+
+	wss.clients.forEach((client) => {
+		if (
+			client.readyState === WebSocket.OPEN &&
+			client.userId &&
+			allowedUserIds.has(client.userId)
+		) {
+			client.send(message);
+		}
+	});
+}
+
+wss.on("connection", async (ws, req) => {
 	console.log("WebSocket client connected");
+
+	const cookieHeader = req.headers.cookie || "";
+	const tokenMatch = cookieHeader.match(/token=([^;]+)/);
+	const token = tokenMatch ? tokenMatch[1] : null;
+
+	if (token) {
+		const user = await DB.getUserByToken(token);
+		if (user) {
+			ws.userId = user.id;
+			ws.userEmail = user.email;
+		}
+	}
 
 	ws.send(JSON.stringify({
 		type: "welcome",
@@ -89,6 +122,78 @@ wss.on("connection", (ws) => {
 	ws.on("close", () => {
 		console.log("WebSocket client disconnected");
 	});
+});
+
+app.post('/api/share-dashboard', async (req, res) => {
+	const user = await getAuthUser(req);
+
+	if (!user) {
+		return res.status(401).json({ message: 'Unauthorized' });
+	}
+
+	const { email } = req.body;
+
+	if (!email) {
+		return res.status(400).json({ message: 'Email is required' });
+	}
+
+	const viewer = await DB.getUser(email);
+
+	if (!viewer) {
+		return res.status(404).json({ message: 'User not found' });
+	}
+
+	if (viewer.id === user.id) {
+		return res.status(400).json({ message: 'You cannot share your dashboard with yourself' });
+	}
+
+	const existingShare = await DB.getDashboardShare(user.id, viewer.id);
+
+	if (existingShare) {
+		return res.status(409).json({ message: 'Dashboard already shared with this user' });
+	}
+
+	const share = {
+		id: uuidv4(),
+		ownerUserId: user.id,
+		ownerEmail: user.email,
+		viewerUserId: viewer.id,
+		viewerEmail: viewer.email,
+		canEdit: false,
+	};
+
+	await DB.addDashboardShare(share);
+
+	res.status(201).json({
+		message: `Dashboard shared with ${viewer.email}`,
+		share,
+	});
+});
+
+app.get('/api/shared-with-me', async (req, res) => {
+	const user = await getAuthUser(req);
+
+	if (!user) {
+		return res.status(401).json({ message: 'Unauthorized' });
+	}
+
+	const shares = await DB.getDashboardSharesByViewerId(user.id);
+
+	const sharedDashboards = await Promise.all(
+		shares.map(async (share) => {
+			const subscriptions = await DB.getSubscriptionsByUserId(share.ownerUserId);
+
+			return {
+				shareId: share.id,
+				ownerUserId: share.ownerUserId,
+				ownerEmail: share.ownerEmail,
+				canEdit: share.canEdit,
+				subscriptions,
+			};
+		})
+	);
+
+	res.json(sharedDashboards);
 });
 
 app.get('/api/subscriptions', async (req, res) => {
