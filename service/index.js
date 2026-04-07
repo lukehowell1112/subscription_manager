@@ -7,7 +7,14 @@ const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const DB = require('./database');
 
+const http = require('http');
+const { WebSocketServer, WebSocket } = require('ws');
+
 const app = express();
+
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
+
 const publicPath = path.join(__dirname, 'public');
 
 app.use(cors({
@@ -38,6 +45,52 @@ async function getAuthUser(req) {
 	return DB.getUserByToken(token);
 }
 
+function broadcast(data) {
+	const message = JSON.stringify(data);
+
+	wss.clients.forEach((client) => {
+		if (client.readyState === WebSocket.OPEN) {
+			client.send(message);
+		}
+	});
+}
+
+wss.on("connection", (ws) => {
+	console.log("WebSocket client connected");
+
+	ws.send(JSON.stringify({
+		type: "welcome",
+		message: "Connected to Subscription Manager notifications"
+	}));
+
+	ws.on("message", (message) => {
+		try {
+			const data = JSON.parse(message.toString());
+			console.log("Received from client:", data);
+
+			if (data.type === "enable_notifications") {
+				ws.send(JSON.stringify({
+					type: "notification",
+					message: "Notifications enabled!"
+				}));
+			}
+
+			if (data.type === "share_dashboard") {
+				ws.send(JSON.stringify({
+					type: "notification",
+					message: "Dashboard sharing started!"
+				}));
+			}
+		} catch (err) {
+			console.error("Invalid WebSocket message:", err);
+		}
+	});
+
+	ws.on("close", () => {
+		console.log("WebSocket client disconnected");
+	});
+});
+
 app.get('/api/subscriptions', async (req, res) => {
 	const user = await getAuthUser(req);
 
@@ -63,6 +116,14 @@ app.post('/api/subscriptions', async (req, res) => {
 	};
 
 	await DB.addSubscription(subscription);
+
+	await DB.addSubscription(subscription);
+
+	broadcast({
+		type: "subscription_updated",
+		message: `Subscription "${subscription.name}" added`
+	});
+
 	res.status(201).json(subscription);
 });
 
@@ -99,6 +160,7 @@ app.delete('/api/subscriptions/:id', async (req, res) => {
 	if (!deleted) {
 		return res.status(404).json({ message: 'Subscription not found' });
 	}
+
 
 	res.json({ message: 'Deleted' });
 });
@@ -179,6 +241,6 @@ app.get(/.*/, (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
 	console.log(`Listening on port ${port}`);
 });
