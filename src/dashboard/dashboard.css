@@ -201,6 +201,25 @@
 	}
 }
 
+.share-form {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.share-form .input {
+	min-width: 220px;
+}
+
+.shared-section {
+	margin-top: 30px;
+}
+
+.shared-dashboard-block {
+	margin-top: 24px;
+}
+
 /* responsive */
 @media (max-width: 900px) {
   .page-head {
