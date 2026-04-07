@@ -145,6 +145,14 @@ export function Dashboard() {
                     }
                 }
 
+                if (data.type === "dashboard_shared_with_you") {
+                    loadSharedDashboards();
+
+                    if (data.message) {
+                        setLiveMessage(data.message);
+                    }
+                }
+
                 if (data.type === "notification" && data.message) {
                     setLiveMessage(data.message);
                 }
