@@ -13,6 +13,7 @@ export function Dashboard() {
 
     const socketRef = useRef(null);
     const [liveMessage, setLiveMessage] = useState("");
+    const [showToast, setShowToast] = useState(false);
 
 	useEffect(() => {
 		const syncUser = () => setUser(getCurrentUser());
@@ -70,11 +71,18 @@ export function Dashboard() {
     useEffect(() => {
         if (!liveMessage) return;
 
-        const timer = setTimeout(() => {
-            setLiveMessage("");
-        }, 3000);
+        const fadeTimer = setTimeout(() => {
+            setShowToast(false);
+        }, 2500);
 
-        return () => clearTimeout(timer);
+        const removeTimer = setTimeout(() => {
+            setLiveMessage("");
+        }, 2800);
+
+        return () => {
+            clearTimeout(fadeTimer);
+            clearTimeout(removeTimer);
+        };
     }, [liveMessage]);
 
     useEffect(() => {
@@ -97,6 +105,7 @@ export function Dashboard() {
 
                 if (data.type === "notification" && data.message) {
                     setLiveMessage(data.message);
+                    setShowToast(true);
                 }
 
                 if (
@@ -320,7 +329,7 @@ export function Dashboard() {
                     </div>
                 </section>
                 {liveMessage && (
-                    <div className="live-toast">
+                    <div className={`live-toast ${showToast ? "show" : "hide"}`}>
                         {liveMessage}
                     </div>
                 )}
