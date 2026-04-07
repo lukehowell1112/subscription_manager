@@ -175,6 +175,32 @@ app.post('/api/share-dashboard', async (req, res) => {
 	}
 });
 
+app.get('/api/shared-with-me', async (req, res) => {
+	const user = await getAuthUser(req);
+
+	if (!user) {
+		return res.status(401).json({ message: 'Unauthorized' });
+	}
+
+	const shares = await DB.getDashboardSharesByViewerId(user.id);
+
+	const sharedDashboards = await Promise.all(
+		shares.map(async (share) => {
+			const subscriptions = await DB.getSubscriptionsByUserId(share.ownerUserId);
+
+			return {
+				shareId: share.id,
+				ownerUserId: share.ownerUserId,
+				ownerEmail: share.ownerEmail,
+				canEdit: share.canEdit,
+				subscriptions,
+			};
+		})
+	);
+
+	res.json(sharedDashboards);
+});
+
 app.get('/api/subscriptions', async (req, res) => {
 	const user = await getAuthUser(req);
 
