@@ -15,6 +15,9 @@ export function Dashboard() {
     const [liveMessage, setLiveMessage] = useState("");
     const [showToast, setShowToast] = useState(false);
 
+    const [sharedDashboards, setSharedDashboards] = useState([]);
+    const [shareEmail, setShareEmail] = useState("");
+
 	useEffect(() => {
 		const syncUser = () => setUser(getCurrentUser());
 		window.addEventListener("authchanged", syncUser);
@@ -26,16 +29,21 @@ export function Dashboard() {
 		};
 	}, []);
 
-    function loadSubscriptions() {
-        fetch('/api/subscriptions', {
+    function loadSharedDashboards() {
+        fetch('/api/shared-with-me', {
             credentials: "include",
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status}`);
+                }
+                return res.json();
+            })
             .then((data) => {
-                setSubscriptions(data);
+                setSharedDashboards(Array.isArray(data) ? data : []);
             })
             .catch((err) => {
-                console.error('Error fetching subscriptions:', err);
+                console.error('Error fetching shared dashboards:', err);
             });
     }
 
