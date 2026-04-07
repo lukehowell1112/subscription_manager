@@ -6,6 +6,7 @@ const client = new MongoClient(url);
 const db = client.db('subscriptionManager');
 const userCollection = db.collection('user');
 const subscriptionCollection = db.collection('subscription');
+const dashboardShareCollection = db.collection('dashboardShare');
 
 (async function testConnection() {
 	try {
@@ -65,6 +66,26 @@ async function deleteSubscription(id, userId) {
 	return result.deletedCount > 0;
 }
 
+async function addDashboardShare(share) {
+	await dashboardShareCollection.insertOne(share);
+	return share;
+}
+
+function getDashboardShare(ownerUserId, viewerUserId) {
+	return dashboardShareCollection.findOne({
+		ownerUserId: ownerUserId,
+		viewerUserId: viewerUserId,
+	});
+}
+
+function getDashboardSharesByViewerId(viewerUserId) {
+	return dashboardShareCollection.find({ viewerUserId: viewerUserId }).toArray();
+}
+
+function getDashboardSharesByOwnerId(ownerUserId) {
+	return dashboardShareCollection.find({ ownerUserId: ownerUserId }).toArray();
+}
+
 module.exports = {
 	getUser,
 	getUserByToken,
@@ -76,4 +97,7 @@ module.exports = {
 	addSubscription,
 	updateSubscription,
 	deleteSubscription,
+	getDashboardShare,
+	getDashboardSharesByOwnerId,
+	getDashboardSharesByViewerId,
 };
