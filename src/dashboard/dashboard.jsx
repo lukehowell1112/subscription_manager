@@ -33,9 +33,12 @@ export function Dashboard() {
         fetch('/api/subscriptions', {
             credentials: "include",
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) return null;
+                return res.json();
+            })
             .then((data) => {
-                setSubscriptions(Array.isArray(data) ? data : []);
+                if (Array.isArray(data)) setSubscriptions(data);
             })
             .catch((err) => {
                 console.error('Error fetching subscriptions:', err);
