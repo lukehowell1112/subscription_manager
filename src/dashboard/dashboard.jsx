@@ -95,7 +95,7 @@ export function Dashboard() {
                 const data = JSON.parse(event.data);
                 console.log("WS message:", data);
 
-                if (data.message) {
+                if (data.type === "notification" && data.message) {
                     setLiveMessage(data.message);
                 }
 
