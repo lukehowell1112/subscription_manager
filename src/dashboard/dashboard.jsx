@@ -110,16 +110,20 @@ export function Dashboard() {
                 const data = JSON.parse(event.data);
                 console.log("WS message:", data);
 
-                if (data.type === "notification" && data.message) {
-                    setLiveMessage(data.message);
-                }
-
                 if (
                     data.type === "subscription_added" ||
                     data.type === "subscription_updated" ||
                     data.type === "subscription_deleted"
                 ) {
                     loadSubscriptions();
+
+                    if (data.message) {
+                        setLiveMessage(data.message);
+                    }
+                }
+
+                if (data.type === "notification" && data.message) {
+                    setLiveMessage(data.message);
                 }
             } catch (err) {
                 console.error("WS parse error:", err);
