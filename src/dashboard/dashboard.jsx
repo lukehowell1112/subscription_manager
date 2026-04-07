@@ -91,28 +91,28 @@ export function Dashboard() {
     }, []);
 
     useEffect(() => {
-	if (!liveMessage) return;
+        if (!liveMessage) return;
 
-	setShowToast(false);
+        setShowToast(false);
 
-	const showTimer = setTimeout(() => {
-		setShowToast(true);
-	}, 10);
+        const showTimer = setTimeout(() => {
+            setShowToast(true);
+        }, 10);
 
-	const fadeTimer = setTimeout(() => {
-		setShowToast(false);
-	}, 2500);
+        const fadeTimer = setTimeout(() => {
+            setShowToast(false);
+        }, 2500);
 
-	const removeTimer = setTimeout(() => {
-		setLiveMessage("");
-	}, 2800);
+        const removeTimer = setTimeout(() => {
+            setLiveMessage("");
+        }, 2800);
 
-	return () => {
-		clearTimeout(showTimer);
-		clearTimeout(fadeTimer);
-		clearTimeout(removeTimer);
-	};
-}, [liveMessage]);
+        return () => {
+            clearTimeout(showTimer);
+            clearTimeout(fadeTimer);
+            clearTimeout(removeTimer);
+        };
+    }, [liveMessage]);
 
     useEffect(() => {
         const socketUrl =
@@ -300,6 +300,36 @@ export function Dashboard() {
         }
     }
 
+    async function handleRemoveSharedDashboard(shareId) {
+        try {
+            const response = await fetch(`/api/shared-with-me/${shareId}`, {
+                method: "DELETE",
+                credentials: "include",
+            });
+
+            let data = {};
+
+            try {
+                data = await response.json();
+            } catch {
+                data = {};
+            }
+
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to remove shared dashboard");
+            }
+
+            setSharedDashboards((prev) =>
+                prev.filter((dashboard) => dashboard.shareId !== shareId)
+            );
+
+            setLiveMessage(data.message || "Shared dashboard removed.");
+        } catch (err) {
+            console.error("Error removing shared dashboard:", err);
+            setLiveMessage(err.message || "Failed to remove shared dashboard.");
+        }
+    }
+
     return (
         <main className="container main-wrap">
                 <div className="page-head">
@@ -450,6 +480,15 @@ export function Dashboard() {
                                             <h3 className="page-title">{dashboard.ownerEmail}'s Dashboard</h3>
                                             <p className="page-subtitle">View only</p>
                                         </div>
+
+                                        <button
+                                            className="button-secondary"
+                                            type="button"
+                                            onClick={() => handleRemoveSharedDashboard(dashboard.shareId)}
+                                        >
+                                            Remove
+                                        </button>
+
                                     </div>
 
                                     <section className="card table-card">
