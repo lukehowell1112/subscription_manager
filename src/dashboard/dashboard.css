@@ -174,7 +174,20 @@
 	font-size: 0.95rem;
 	line-height: 1.4;
 	backdrop-filter: blur(10px);
-	animation: toast-slide-in 0.25s ease-out;
+	
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.live-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.live-toast.hide {
+  opacity: 0;
+  transform: translateY(10px);
 }
 
 @keyframes toast-slide-in {

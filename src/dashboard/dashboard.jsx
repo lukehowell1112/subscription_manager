@@ -69,21 +69,28 @@ export function Dashboard() {
     }, []);
 
     useEffect(() => {
-        if (!liveMessage) return;
+	if (!liveMessage) return;
 
-        const fadeTimer = setTimeout(() => {
-            setShowToast(false);
-        }, 2500);
+	setShowToast(false);
 
-        const removeTimer = setTimeout(() => {
-            setLiveMessage("");
-        }, 2800);
+	const showTimer = setTimeout(() => {
+		setShowToast(true);
+	}, 10);
 
-        return () => {
-            clearTimeout(fadeTimer);
-            clearTimeout(removeTimer);
-        };
-    }, [liveMessage]);
+	const fadeTimer = setTimeout(() => {
+		setShowToast(false);
+	}, 2500);
+
+	const removeTimer = setTimeout(() => {
+		setLiveMessage("");
+	}, 2800);
+
+	return () => {
+		clearTimeout(showTimer);
+		clearTimeout(fadeTimer);
+		clearTimeout(removeTimer);
+	};
+}, [liveMessage]);
 
     useEffect(() => {
         const socketUrl =
@@ -105,7 +112,6 @@ export function Dashboard() {
 
                 if (data.type === "notification" && data.message) {
                     setLiveMessage(data.message);
-                    setShowToast(true);
                 }
 
                 if (
