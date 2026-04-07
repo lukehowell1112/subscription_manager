@@ -23,7 +23,7 @@ function getUser(email) {
 }
 
 function getUserByToken(token) {
-	return userCollection.findOne({ tokens: token });
+	return userCollection.findOne({ $or: [{ tokens: token }, { token: token }] });
 }
 
 function getUserById(id) {
