@@ -165,6 +165,18 @@ app.post('/api/share-dashboard', async (req, res) => {
 
 		await DB.addDashboardShare(share);
 
+		wss.clients.forEach((client) => {
+			if (
+				client.readyState === WebSocket.OPEN &&
+				client.userId === viewer.id
+			) {
+				client.send(JSON.stringify({
+					type: "dashboard_shared_with_you",
+					message: `${user.email} shared their dashboard with you`,
+				}));
+			}
+		});
+
 		res.status(201).json({
 			message: `Dashboard shared with ${viewer.email}`,
 			share,
