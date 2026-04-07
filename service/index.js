@@ -118,7 +118,8 @@ app.post('/api/subscriptions', async (req, res) => {
 	await DB.addSubscription(subscription);
 
 	broadcast({
-		type: "subscription_updated",
+		type: "subscription_added",
+		subscription,
 		message: `Subscription "${subscription.name}" added`
 	});
 
@@ -142,10 +143,9 @@ app.put('/api/subscriptions/:id', async (req, res) => {
 		return res.status(404).json({ message: 'Subscription not found' });
 	}
 
-	await DB.addSubscription(subscription);
-
 	broadcast({
 		type: "subscription_updated",
+		subscription: updatedSubscription,
 		message: `Subscription "${subscription.name}" added`
 	});
 
@@ -167,7 +167,8 @@ app.delete('/api/subscriptions/:id', async (req, res) => {
 	}
 
 	broadcast({
-		type: "subscription_updated",
+		type: "subscription_deleted",
+		id,
 		message: "Subscription deleted"
 	});
 
