@@ -319,11 +319,11 @@ export function Dashboard() {
                             Enable Notifications
                         </button>
                     
-                        <form className="share-form" onSubmit={handleShareDashboardSubmit}>
+                        <form className="share-form" onSubmit={handleShareDashboardSubmit} noValidate>
                             <input
                                 className="input"
-                                type="email"
-                                placeholder="Share with email"
+                                type="text"
+                                placeholder="Share with username"
                                 value={shareEmail}
                                 onChange={(e) => setShareEmail(e.target.value)}
                             />
@@ -400,6 +400,123 @@ export function Dashboard() {
                         </p>
                     </div>
                 </section>
+                {sharedDashboards.length > 0 && (
+                    <section className="shared-section">
+                        <div className="page-head" style={{ marginTop: "24px" }}>
+                            <div>
+                                <h2 className="page-title">Shared Dashboards</h2>
+                                <p className="page-subtitle">
+                                    Dashboards shared with you by other users.
+                                </p>
+                            </div>
+                        </div>
+
+                        {sharedDashboards.map((dashboard) => {
+                            const monthlyTotal = dashboard.subscriptions.reduce(
+                                (sum, sub) => sum + toMonthly(sub.cost, sub.cycle),
+                                0
+                            );
+
+                            const subscriptionCount = dashboard.subscriptions.length;
+
+                            const topCategory = (() => {
+                                if (dashboard.subscriptions.length === 0) return "—";
+
+                                const counts = {};
+
+                                for (const sub of dashboard.subscriptions) {
+                                    const cat =
+                                        (sub.category || "Uncategorized").trim() ||
+                                        "Uncategorized";
+
+                                    counts[cat] = (counts[cat] || 0) + 1;
+                                }
+
+                                return Object
+                                    .entries(counts)
+                                    .sort((a, b) => b[1] - a[1])[0][0];
+                            })();
+
+                            return (
+                                <div key={dashboard.shareId} className="shared-dashboard-block">
+                                    <div className="page-head">
+                                        <div>
+                                            <h3 className="page-title">{dashboard.ownerEmail}'s Dashboard</h3>
+                                            <p className="page-subtitle">View only</p>
+                                        </div>
+                                    </div>
+
+                                    <section className="card table-card">
+                                        <div className="table-wrap">
+                                            <table className="sub-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Service</th>
+                                                        <th>Price</th>
+                                                        <th>Cycle</th>
+                                                        <th>Next Billing</th>
+                                                        <th>Category</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    {dashboard.subscriptions.length === 0 ? (
+                                                        <tr>
+                                                            <td colSpan="5">
+                                                                No subscriptions to display.
+                                                            </td>
+                                                        </tr>
+                                                    ) : (
+                                                        dashboard.subscriptions.map((sub) => (
+                                                            <tr key={sub.id}>
+                                                                <td>{sub.name}</td>
+                                                                <td>${Number(sub.cost || 0).toFixed(2)}</td>
+                                                                <td>
+                                                                    {typeof sub.cycle === "string" && sub.cycle
+                                                                        ? sub.cycle.charAt(0).toUpperCase() + sub.cycle.slice(1)
+                                                                        : ""}
+                                                                </td>
+                                                                <td>{formatDate(sub.billingDate)}</td>
+                                                                <td>
+                                                                    <span className={`tag ${getCategoryClass(sub.category)}`}>
+                                                                        {typeof sub.category === "string" && sub.category
+                                                                            ? sub.category.charAt(0).toUpperCase() + sub.category.slice(1)
+                                                                            : "Other"}
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        ))
+                                                    )}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+
+                                    <section className="summary-grid">
+                                        <div className="card summary-card">
+                                            <p className="summary-label">Monthly total</p>
+                                            <p className="summary-value">${monthlyTotal.toFixed(2)}</p>
+                                        </div>
+
+                                        <div className="card summary-card">
+                                            <p className="summary-label">Subscriptions</p>
+                                            <p className="summary-value">{subscriptionCount}</p>
+                                        </div>
+
+                                        <div className="card summary-card">
+                                            <p className="summary-label">Top category</p>
+                                            <p className="summary-value">
+                                                {topCategory && topCategory !== "—"
+                                                    ? topCategory.charAt(0).toUpperCase() + topCategory.slice(1)
+                                                    : topCategory}
+                                            </p>
+                                        </div>
+                                    </section>
+                                </div>
+                            );
+                        })}
+                    </section>
+                )}
                 {liveMessage && (
                     <div className={`live-toast ${showToast ? "show" : "hide"}`}>
                         {liveMessage}
