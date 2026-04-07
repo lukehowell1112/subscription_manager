@@ -68,6 +68,16 @@ export function Dashboard() {
     }, []);
 
     useEffect(() => {
+        if (!liveMessage) return;
+
+        const timer = setTimeout(() => {
+            setLiveMessage("");
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, [liveMessage]);
+
+    useEffect(() => {
         const socketUrl =
             window.location.hostname === "localhost"
                 ? "ws://localhost:4000"
@@ -223,12 +233,6 @@ export function Dashboard() {
                         </p>
                     </section>
 
-                    {liveMessage && (
-                        <div className="card" style={{ marginTop: "10px" }}>
-                            {liveMessage}
-                        </div>
-                    )}
-
                     <div className="button-row">
                         <Link to="/edit_sub" className="button-primary button-link">Edit</Link>
                         <button 
@@ -315,6 +319,11 @@ export function Dashboard() {
                         </p>
                     </div>
                 </section>
+                {liveMessage && (
+                    <div className="live-toast">
+                        {liveMessage}
+                    </div>
+                )}
             </main>
     );
 }
