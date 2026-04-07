@@ -117,8 +117,6 @@ app.post('/api/subscriptions', async (req, res) => {
 
 	await DB.addSubscription(subscription);
 
-	await DB.addSubscription(subscription);
-
 	broadcast({
 		type: "subscription_updated",
 		message: `Subscription "${subscription.name}" added`
