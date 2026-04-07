@@ -152,6 +152,11 @@
   letter-spacing: -0.3px;
 }
 
+
+.page-head .summary-card {
+    max-width: 360px;
+}
+
 /* Make the dashboard button row wrap nicely */
 .page-head .button-row {
   margin-top: 0;       /* overrides main.css default spacing */
@@ -216,8 +221,13 @@
 	margin-top: 30px;
 }
 
-.shared-dashboard-block {
-	margin-top: 24px;
+.shared-dashboard-block .button-secondary {
+	flex: none;
+	width: auto;
+	display: inline-block;
+	padding: 6px 12px;
+	font-size: 0.85rem;
+	white-space: nowrap;
 }
 
 /* responsive */
