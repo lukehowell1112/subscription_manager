@@ -62,6 +62,7 @@ export function Dashboard() {
 
     useEffect(() => {
         loadSubscriptions();
+        loadSharedDashboards();
     }, []);
 
     useEffect(() => {
@@ -137,6 +138,7 @@ export function Dashboard() {
                     data.type === "subscription_deleted"
                 ) {
                     loadSubscriptions();
+                    loadSharedDashboards();
 
                     if (data.message) {
                         setLiveMessage(data.message);
@@ -258,6 +260,40 @@ export function Dashboard() {
         }));
     }
 
+    async function handleShareDashboardSubmit(e) {
+        e.preventDefault();
+
+        if (!shareEmail.trim()) {
+            setLiveMessage("Please enter an email address.");
+            return;
+        }
+
+        try {
+            const response = await fetch("/api/share-dashboard", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    email: shareEmail.trim(),
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to share dashboard");
+            }
+
+            setShareEmail("");
+            setLiveMessage(data.message || "Dashboard shared successfully.");
+        } catch (err) {
+            console.error("Error sharing dashboard:", err);
+            setLiveMessage(err.message || "Failed to share dashboard.");
+        }
+    }
+
     return (
         <main className="container main-wrap">
                 <div className="page-head">
@@ -283,13 +319,18 @@ export function Dashboard() {
                             Enable Notifications
                         </button>
                     
-                        <button 
-                            className="button-secondary" 
-                            type="button"
-                            onClick={handleShareDashboard}
-                        >
-                            Share Dashboard
-                        </button>
+                        <form className="share-form" onSubmit={handleShareDashboardSubmit}>
+                            <input
+                                className="input"
+                                type="email"
+                                placeholder="Share with email"
+                                value={shareEmail}
+                                onChange={(e) => setShareEmail(e.target.value)}
+                            />
+                            <button className="button-secondary" type="submit">
+                                Share Dashboard
+                            </button>
+                        </form>
                     </div>
                 </div>
 
