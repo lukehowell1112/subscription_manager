@@ -66,6 +66,49 @@ export function Dashboard() {
 			setAdvice("Failed to load quote.");
 		});
     }, []);
+
+    useEffect(() => {
+        const socketUrl =
+            window.location.hostname === "localhost"
+                ? "ws://localhost:4000"
+                : `${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.host}`;
+
+        const socket = new WebSocket(socketUrl);
+        socketRef.current = socket;
+
+        socket.onopen = () => {
+            console.log("WebSocket connected");
+        };
+
+        socket.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                console.log("WS message:", data);
+
+                if (data.type === "notification") {
+                    setLiveMessage(data.message);
+                }
+
+                if (data.type === "subscription_updated") {
+                    loadSubscriptions();
+                }
+            } catch (err) {
+                console.error("WS parse error:", err);
+            }
+        };
+
+        socket.onclose = () => {
+            console.log("WebSocket disconnected");
+        };
+
+        socket.onerror = (err) => {
+            console.error("WebSocket error:", err);
+        };
+
+        return () => {
+            socket.close();
+        };
+    }, []);
     
     function toMonthly(cost, cycle) {
         const c = Number(cost);
