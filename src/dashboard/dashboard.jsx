@@ -182,6 +182,28 @@ export function Dashboard() {
 			.sort((a, b) => b[1] - a[1])[0][0];
 	})();
 
+    function handleEnableNotifications() {
+        if (!socketRef.current || socketRef.current.readyState!== 1) {
+            console.log("Socket not ready");
+            return;
+        }
+
+        socketRef.current.send(JSON.stringify({
+            type: "enable_notifications"
+        }));
+    }
+
+    function handleShareDashboard() {
+        if (!socketRef.current || socketRef.current.readyState !== 1) {
+            console.log("Socket not ready");
+            return;
+        }
+
+        socketRef.current.send(JSON.stringify({
+            type: "share_dashbaord"
+        }));
+    }
+
     return (
         <main className="container main-wrap">
                 <div className="page-head">
@@ -197,10 +219,29 @@ export function Dashboard() {
                         </p>
                     </section>
 
+                    {liveMessage && (
+                        <div className="card" style={{ marginTop: "10px" }}>
+                            {liveMessage}
+                        </div>
+                    )}
+
                     <div className="button-row">
                         <Link to="/edit_sub" className="button-primary button-link">Edit</Link>
-                        <button className="button-secondary" type="button">Enable Notifications</button>
-                        <button className="button-secondary" type="button">Share Dashboard</button>
+                        <button 
+                            className="button-secondary" 
+                            type="button"
+                            onClick={handleEnableNotifications}
+                        >
+                            Enable Notifications
+                        </button>
+                    
+                        <button 
+                            className="button-secondary" 
+                            type="button"
+                            onClick={handleShareDashboard}
+                        >
+                            Share Dashboard
+                        </button>
                     </div>
                 </div>
 
