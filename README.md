@@ -111,8 +111,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **Backend listens for WebSocket connection** - index.js uses wss.on("connection", ...) and listens for incoming websocket connections. It also extracts the auth token from the cookie header and connects userId and userEmail to the socket so it knows who's connected.
-- [x] **Frontend makes WebSocket connection** - A websocket url is created when the dashboard mounts inside a useEffect.
-- [x] **Data sent over WebSocket connection** - The serveer sends information to the client and from the client to the server.
-- [x] **WebSocket data displayed** - The user will receive messages and live updates through a toast notifiaction through setLiveMessage.
+- [x] **Backend listens for WebSocket connection** - Implemented in `service/index.js` using `wss.on("connection", ...)`. Authenticates each connection via cookie token and attaches the user's ID to the socket.
+- [x] **Frontend makes WebSocket connection** - The dashboard connects via `new WebSocket(url)` on mount, using `ws://` locally and `wss://` in production.
+- [x] **Data sent over WebSocket connection** - The server broadcasts subscription changes (add, edit, delete) and dashboard share notifications to relevant connected clients.
+- [x] **WebSocket data displayed** - Incoming messages trigger live data reloads and display a toast notification to the user.
 - [x] **Application is fully functional** - That's a wrap!
