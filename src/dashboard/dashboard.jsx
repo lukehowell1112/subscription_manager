@@ -85,12 +85,30 @@ export function Dashboard() {
                 const data = JSON.parse(event.data);
                 console.log("WS message:", data);
 
-                if (data.type === "notification") {
+                if (data.message) {
                     setLiveMessage(data.message);
                 }
 
-                if (data.type === "subscription_updated") {
-                    loadSubscriptions();
+                if (data.type === "subscription_added" && data.subscription) {
+                    setSubscriptions((prev) => {
+                        const exists = prev.some((sub) => sub.id === data.subscription.id);
+                        if (exists) return prev;
+                        return [...prev, data.subscription];
+                    });
+                }
+
+                if (data.type === "subscription_updated" && data.subscription) {
+                    setSubscriptions((prev) =>
+                        prev.map((sub) =>
+                            sub.id === data.subscription.id ? data.subscription : sub
+                        )
+                    );
+                }
+
+                if (data.type === "subscription_deleted" && data.id) {
+                    setSubscriptions((prev) =>
+                        prev.filter((sub) => sub.id !== data.id)
+                    );
                 }
             } catch (err) {
                 console.error("WS parse error:", err);
