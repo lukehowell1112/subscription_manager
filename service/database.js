@@ -88,7 +88,7 @@ function getDashboardSharesByOwnerId(ownerUserId) {
 
 async function deleteDashboardById(shareId, viewerUserId) {
 	const result = await dashboardShareCollection.deleteOne({
-		id: sharedId,
+		id: shareId,
 		viewerUserId: viewerUserId,
 	});
 
