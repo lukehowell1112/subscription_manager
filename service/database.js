@@ -86,6 +86,15 @@ function getDashboardSharesByOwnerId(ownerUserId) {
 	return dashboardShareCollection.find({ ownerUserId: ownerUserId }).toArray();
 }
 
+async function deleteDashboardById(shareId, viewerUserId) {
+	const result = await dashboardShareCollection.deleteOne({
+		id: sharedId,
+		viewerUserId: viewerUserId,
+	});
+
+	return result.deletedCount > 0;
+}
+
 module.exports = {
 	getUser,
 	getUserByToken,
@@ -101,4 +110,5 @@ module.exports = {
 	getDashboardShare,
 	getDashboardSharesByOwnerId,
 	getDashboardSharesByViewerId,
+	deleteDashboardById,
 };
