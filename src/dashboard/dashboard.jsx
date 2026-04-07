@@ -345,16 +345,17 @@ export function Dashboard() {
                         </p>
                     </section>
 
-                    <div className="button-row">
-                        <Link to="/edit_sub" className="button-primary button-link">Edit</Link>
-                        <button 
-                            className="button-secondary" 
-                            type="button"
-                            onClick={handleEnableNotifications}
-                        >
-                            Enable Notifications
-                        </button>
-                    
+                    <div className="dashboard-actions">
+                        <div className="button-row">
+                            <Link to="/edit_sub" className="button-primary button-link">Edit</Link>
+                            <button
+                                className="button-secondary"
+                                type="button"
+                                onClick={handleEnableNotifications}
+                            >
+                                Enable Notifications
+                            </button>
+                        </div>
                         <form className="share-form" onSubmit={handleShareDashboardSubmit} noValidate>
                             <input
                                 className="input"
@@ -363,7 +364,7 @@ export function Dashboard() {
                                 value={shareEmail}
                                 onChange={(e) => setShareEmail(e.target.value)}
                             />
-                            <button className="button-secondary" type="submit">
+                            <button className="button-secondary share-form-btn" type="submit">
                                 Share Dashboard
                             </button>
                         </form>
