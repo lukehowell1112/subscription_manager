@@ -242,6 +242,14 @@
 
 .shared-section {
 	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+.shared-dashboard-block {
+	padding-top: 10px;
+	border-top: 1px solid var(--border);
 }
 
 .shared-dashboard-block .button-secondary {
