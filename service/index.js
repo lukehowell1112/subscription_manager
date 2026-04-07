@@ -210,7 +210,7 @@ app.delete('/api/shared-with-me/:shareId', async (req, res) => {
 
 	const shareId = req.params.shareId;
 
-	const deleted = await DB.deleteDashboardShareById(shareId, user.id);
+	const deleted = await DB.deleteDashboardById(shareId, user.id);
 
 	if (!deleted) {
 		return res.status(404).json({ message: 'Shared dashboard not found' });
